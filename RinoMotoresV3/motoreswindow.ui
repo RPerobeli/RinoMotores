@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MotoresWindow</class>
+ <widget class="QDialog" name="MotoresWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>695</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color:#fff</string>
+  </property>
+  <widget class="QComboBox" name="comboBox_Pesquisa">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>620</y>
+     <width>141</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:#c73232;
+color:#fff;</string>
+   </property>
+   <item>
+    <property name="text">
+     <string>Fabricante</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Tensão</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>CorrenteMáx</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>CorrenteMín</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>RotaçãoMáx</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>TorqueMáx</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>660</y>
+     <width>451</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <widget class="QLineEdit" name="Edit_Pesq"/>
+    </item>
+    <item>
+     <widget class="QPushButton" name="Btn_Consultar">
+      <property name="styleSheet">
+       <string notr="true">background-color:#c73232;
+color:#fff;</string>
+      </property>
+      <property name="text">
+       <string>Consultar Motor</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="layoutWidget_3">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>610</y>
+     <width>591</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QPushButton" name="Btn_Excluir">
+      <property name="styleSheet">
+       <string notr="true">background-color:#c73232;
+color:#fff;</string>
+      </property>
+      <property name="text">
+       <string>Excluir Selecionados</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="Btn_Alterar">
+      <property name="styleSheet">
+       <string notr="true">background-color:#c73232;
+color:#fff;</string>
+      </property>
+      <property name="text">
+       <string>Alterar Motor</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="Btn_Adicionar">
+      <property name="styleSheet">
+       <string notr="true">background-color:#c73232;
+color:#fff;</string>
+      </property>
+      <property name="text">
+       <string>Adicionar Motor</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="Btn_Fechar">
+      <property name="styleSheet">
+       <string notr="true">background-color:#c73232;
+color:#fff;</string>
+      </property>
+      <property name="text">
+       <string>Fechar</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>21</y>
+     <width>881</width>
+     <height>551</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:#c73232;
+color:#fff;</string>
+      </property>
+      <property name="text">
+       <string>DataBase dos Motores</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTableWidget" name="tableWidget">
+      <column>
+       <property name="text">
+        <string>Fabricante</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Tensão</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Corrente mín</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Corrente Máx</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Rotação Máx</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Torque Máx</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Preço</string>
+       </property>
+      </column>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
