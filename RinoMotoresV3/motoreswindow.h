@@ -19,6 +19,8 @@ public:
     ~MotoresWindow();
     void Preenche_Tabela();
 
+    void Propriedades_Tabela();
+
 private slots:
     void on_Btn_Fechar_clicked();
 
@@ -27,6 +29,13 @@ private slots:
     void on_Btn_Consultar_clicked();
 
 
+
+    void on_Btn_Excluir_clicked();
+
+
+    void on_Btn_Atualizar_clicked();
+
+    void on_Btn_Alterar_clicked();
 
 private:
     Ui::MotoresWindow *ui;

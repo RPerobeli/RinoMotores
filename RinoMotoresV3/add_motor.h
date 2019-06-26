@@ -1,7 +1,13 @@
 #ifndef ADD_MOTOR_H
 #define ADD_MOTOR_H
 
+#include "motoreswindow.h"
+#include "mainwindow.h"
 #include <QDialog>
+#include <QtSql>
+#include <QDebug>
+#include <QFileInfo>
+#include <QMessageBox>
 
 namespace Ui {
 class Add_motor;

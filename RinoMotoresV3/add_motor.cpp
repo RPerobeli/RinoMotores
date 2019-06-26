@@ -30,13 +30,13 @@ void Add_motor::on_BtnOK_clicked()
     QString T_max_str = ui->Edit_Torque->text();
     QString Preco_str = ui->Edit_Preco->text();
 
-
+    //Resistra os valores obtidos no banco de dados, caso sucesso, limpa todas as células para receberem um novo valor
     QSqlQuery query;
-    //query.prepare("insert into tb_Motores (Fabricante,Tensão,CorrenteMax,CorrenteMin,RotaçãoMax,TorqueMax,Preço)"
-    //              " values('"+fab_str+"','"+tensao_str+"','"+Imax_str+"','"+Imin_str+"','"+Rot_max_str+"','"+T_max_str+"','"+Preco_str+"')");
-    query.prepare("insert into tb_Motores (Fabricante,Tensão,CorrenteMax) values('"+fab_str+"','"+tensao_str+"','"+Imax_str+"')");
+    query.prepare("insert into tb_Motores (Fabricante,Tensão,CorrenteMax,CorrenteMin,RotaçãoMax,TorqueMax,Preço)"
+                  " values('"+fab_str+"','"+tensao_str+"','"+Imax_str+"','"+Imin_str+"','"+Rot_max_str+"','"+T_max_str+"','"+Preco_str+"')");
      if(query.exec())
      {
+        //tab.Preenche_Tabela();
         QMessageBox::information(this,"","Sucesso");
         ui->Edit_Fabricante->clear();
         ui->Edit_Tensao->clear();
@@ -46,8 +46,10 @@ void Add_motor::on_BtnOK_clicked()
         ui->Edit_Torque->clear();
         ui->Edit_Preco->clear();
         ui->Edit_Fabricante->setFocus();
-       }else
-        {
-            qDebug()<<"Erro ao inserir registro";
-      }
+
+     }
+     else
+     {
+        qDebug()<<"Erro ao inserir registro";
+     }
 }

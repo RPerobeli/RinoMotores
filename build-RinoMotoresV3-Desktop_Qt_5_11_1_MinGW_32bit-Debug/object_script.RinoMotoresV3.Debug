@@ -1,0 +1,13 @@
+INPUT(
+./debug\main.o
+./debug\mainwindow.o
+./debug\motoreswindow.o
+./debug\add_motor.o
+./debug\results.o
+./debug\edit_motor.o
+./debug\moc_mainwindow.o
+./debug\moc_motoreswindow.o
+./debug\moc_add_motor.o
+./debug\moc_results.o
+./debug\moc_edit_motor.o
+);

@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle("Rinobot Team - Cálculo de Motores");
+
 }
 
 MainWindow::~MainWindow()

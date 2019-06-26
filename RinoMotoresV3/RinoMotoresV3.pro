@@ -27,19 +27,22 @@ SOURCES += \
         mainwindow.cpp \
     motoreswindow.cpp \
     add_motor.cpp \
-    results.cpp
+    results.cpp \
+    edit_motor.cpp
 
 HEADERS += \
         mainwindow.h \
     motoreswindow.h \
     add_motor.h \
-    results.h
+    results.h \
+    edit_motor.h
 
 FORMS += \
         mainwindow.ui \
     motoreswindow.ui \
     add_motor.ui \
-    results.ui
+    results.ui \
+    edit_motor.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

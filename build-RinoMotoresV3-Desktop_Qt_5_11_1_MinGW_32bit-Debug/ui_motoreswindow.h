@@ -38,16 +38,17 @@ public:
     QPushButton *Btn_Alterar;
     QPushButton *Btn_Adicionar;
     QPushButton *Btn_Fechar;
-    QWidget *widget;
+    QWidget *layoutWidget1;
     QVBoxLayout *verticalLayout;
     QLabel *label;
     QTableWidget *tableWidget;
+    QPushButton *Btn_Atualizar;
 
     void setupUi(QDialog *MotoresWindow)
     {
         if (MotoresWindow->objectName().isEmpty())
             MotoresWindow->setObjectName(QStringLiteral("MotoresWindow"));
-        MotoresWindow->resize(900, 695);
+        MotoresWindow->resize(990, 694);
         MotoresWindow->setStyleSheet(QStringLiteral("background-color:#fff"));
         comboBox_Pesquisa = new QComboBox(MotoresWindow);
         comboBox_Pesquisa->addItem(QString());
@@ -80,7 +81,7 @@ public:
 
         layoutWidget_3 = new QWidget(MotoresWindow);
         layoutWidget_3->setObjectName(QStringLiteral("layoutWidget_3"));
-        layoutWidget_3->setGeometry(QRect(300, 610, 591, 51));
+        layoutWidget_3->setGeometry(QRect(470, 600, 511, 61));
         horizontalLayout = new QHBoxLayout(layoutWidget_3);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
@@ -112,13 +113,13 @@ public:
 
         horizontalLayout->addWidget(Btn_Fechar);
 
-        widget = new QWidget(MotoresWindow);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(10, 21, 881, 551));
-        verticalLayout = new QVBoxLayout(widget);
+        layoutWidget1 = new QWidget(MotoresWindow);
+        layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(10, 21, 971, 551));
+        verticalLayout = new QVBoxLayout(layoutWidget1);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        label = new QLabel(widget);
+        label = new QLabel(layoutWidget1);
         label->setObjectName(QStringLiteral("label"));
         label->setEnabled(true);
         QFont font;
@@ -130,7 +131,7 @@ public:
 
         verticalLayout->addWidget(label);
 
-        tableWidget = new QTableWidget(widget);
+        tableWidget = new QTableWidget(layoutWidget1);
         if (tableWidget->columnCount() < 7)
             tableWidget->setColumnCount(7);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
@@ -151,6 +152,11 @@ public:
 
         verticalLayout->addWidget(tableWidget);
 
+        Btn_Atualizar = new QPushButton(MotoresWindow);
+        Btn_Atualizar->setObjectName(QStringLiteral("Btn_Atualizar"));
+        Btn_Atualizar->setGeometry(QRect(10, 580, 121, 25));
+        Btn_Atualizar->setStyleSheet(QLatin1String("background-color:#c73232;\n"
+"color:#fff;"));
 
         retranslateUi(MotoresWindow);
 
@@ -187,6 +193,7 @@ public:
         ___qtablewidgetitem5->setText(QApplication::translate("MotoresWindow", "Torque M\303\241x", nullptr));
         QTableWidgetItem *___qtablewidgetitem6 = tableWidget->horizontalHeaderItem(6);
         ___qtablewidgetitem6->setText(QApplication::translate("MotoresWindow", "Pre\303\247o", nullptr));
+        Btn_Atualizar->setText(QApplication::translate("MotoresWindow", "Atualizar", nullptr));
     } // retranslateUi
 
 };
