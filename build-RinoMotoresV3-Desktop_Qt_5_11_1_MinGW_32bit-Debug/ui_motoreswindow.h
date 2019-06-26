@@ -168,10 +168,10 @@ public:
         MotoresWindow->setWindowTitle(QApplication::translate("MotoresWindow", "Dialog", nullptr));
         comboBox_Pesquisa->setItemText(0, QApplication::translate("MotoresWindow", "Fabricante", nullptr));
         comboBox_Pesquisa->setItemText(1, QApplication::translate("MotoresWindow", "Tens\303\243o", nullptr));
-        comboBox_Pesquisa->setItemText(2, QApplication::translate("MotoresWindow", "CorrenteM\303\241x", nullptr));
-        comboBox_Pesquisa->setItemText(3, QApplication::translate("MotoresWindow", "CorrenteM\303\255n", nullptr));
-        comboBox_Pesquisa->setItemText(4, QApplication::translate("MotoresWindow", "Rota\303\247\303\243oM\303\241x", nullptr));
-        comboBox_Pesquisa->setItemText(5, QApplication::translate("MotoresWindow", "TorqueM\303\241x", nullptr));
+        comboBox_Pesquisa->setItemText(2, QApplication::translate("MotoresWindow", "CorrenteMax", nullptr));
+        comboBox_Pesquisa->setItemText(3, QApplication::translate("MotoresWindow", "CorrenteMin", nullptr));
+        comboBox_Pesquisa->setItemText(4, QApplication::translate("MotoresWindow", "Rota\303\247\303\243oMax", nullptr));
+        comboBox_Pesquisa->setItemText(5, QApplication::translate("MotoresWindow", "TorqueMax", nullptr));
 
         Btn_Consultar->setText(QApplication::translate("MotoresWindow", "Consultar Motor", nullptr));
         Btn_Excluir->setText(QApplication::translate("MotoresWindow", "Excluir Selecionados", nullptr));

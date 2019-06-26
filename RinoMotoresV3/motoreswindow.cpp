@@ -69,6 +69,7 @@ MotoresWindow::MotoresWindow(QWidget *parent) :
     Database_Verify();
     //Ao iniciar a janela, exibe na tabela todos os motores do banco de dados
     Preenche_Tabela();
+    ui->Btn_Excluir->setEnabled(false);
 
 }
 
@@ -142,16 +143,16 @@ QString Verifica_Caracteristica(int indice)
        corresp="Tensão";
        break;
    case 2:
-       corresp="Corrente Max";
+       corresp="CorrenteMax";
        break;
    case 3:
-       corresp="Corrente Min";
+       corresp="CorrenteMin";
        break;
    case 4:
-       corresp="Rotação Max";
+       corresp="RotaçãoMax";
        break;
    case 5:
-       corresp="Torque Max";
+       corresp="TorqueMax";
        break;
    case 6:
        corresp="Preço";
@@ -215,6 +216,7 @@ void MotoresWindow::on_Btn_Excluir_clicked()
     {
         QMessageBox::warning(this,"ERRO","Erro ao excluir registro");
     }
+    ui->Btn_Excluir->setEnabled(false);
 }
 
 
@@ -229,4 +231,9 @@ void MotoresWindow::on_Btn_Alterar_clicked()
 {
     Edit_Motor Janela_alterar_motor(this);
     Janela_alterar_motor.exec();
+}
+
+void MotoresWindow::on_tableWidget_cellClicked(int row, int column)
+{
+    ui->Btn_Excluir->setEnabled(true);
 }

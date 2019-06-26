@@ -27,6 +27,8 @@ private slots:
 
     void on_Btn_Calcular_clicked();
 
+    void on_Btn_DadosRobo_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

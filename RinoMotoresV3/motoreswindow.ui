@@ -41,22 +41,22 @@ color:#fff;</string>
    </item>
    <item>
     <property name="text">
-     <string>CorrenteMáx</string>
+     <string>CorrenteMax</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>CorrenteMín</string>
+     <string>CorrenteMin</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>RotaçãoMáx</string>
+     <string>RotaçãoMax</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>TorqueMáx</string>
+     <string>TorqueMax</string>
     </property>
    </item>
   </widget>
