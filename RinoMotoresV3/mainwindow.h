@@ -20,6 +20,10 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void Database_Verify();
+
+    void Limpa_CondicoesDeContorno();
+
 private slots:
     void on_Btn_Motores_clicked();
 

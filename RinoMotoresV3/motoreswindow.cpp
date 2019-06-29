@@ -10,9 +10,9 @@
 #include <QFileInfo>
 
 //Salva o banco de dados em uma variável
-static QSqlDatabase DbMotores = QSqlDatabase::addDatabase("QSQLITE");
+//static QSqlDatabase DbMotores = QSqlDatabase::addDatabase("QSQLITE");
 
-void Database_Verify()
+/*void Database_Verify()
 {
     //Confere se o banco de dados foi aberto
     if(!DbMotores.open())
@@ -29,7 +29,7 @@ void Database_Verify()
     }
     if(!DbMotores.isOpen())
     {
-        //Caixa de mensagem que aparece quando há erro ao abrir o banco de dados
+        //Caixa de mensagem que aparece quando há erro ao conectar com o banco de dados
         QMessageBox ErroOpenDb;
         ErroOpenDb.setText("Erro ao conectar o banco de dados!");
         ErroOpenDb.exec();
@@ -40,7 +40,7 @@ void Database_Verify()
        qDebug()<<"Conectado ao Banco";
     }
     return;
-}
+}*/
 
 MotoresWindow::MotoresWindow(QWidget *parent) :
     QDialog(parent),
@@ -51,22 +51,9 @@ MotoresWindow::MotoresWindow(QWidget *parent) :
     ui->Edit_Pesq->setFocus();
 
     //Indica o caminho do banco de dados
-    //DbMotores.setDatabaseName("D:/UFJF/Projetos Qt/RinoMotoresV3/db_Motores.db");
-    DbMotores.setDatabaseName("../RinoMotoresV3/db_Motores.db");
-    if(!DbMotores.open())
-    {
-        //Caixa de mensagem que aparece quando há erro ao abrir o banco de dados
-        QMessageBox ErroOpenDb;
-        ErroOpenDb.setText("Erro ao abrir ao banco de dados!");
-        ErroOpenDb.exec();
-        return;
-    }
-    else
-    {
-       qDebug()<<"Banco Aberto";
-    }
+    //DbMotores.setDatabaseName("../RinoMotoresV3/db_Motores.db");
+    //Database_Verify();
 
-    Database_Verify();
     //Ao iniciar a janela, exibe na tabela todos os motores do banco de dados
     Preenche_Tabela();
     ui->Btn_Excluir->setEnabled(false);
@@ -115,6 +102,12 @@ void MotoresWindow::Preenche_Tabela()
             }
 }
 
+void MotoresWindow::Atualiza_Tabela()
+{
+    ui->tableWidget->setRowCount(0);
+    Preenche_Tabela();
+}
+
 MotoresWindow::~MotoresWindow()
 {
     delete ui;
@@ -129,6 +122,9 @@ void MotoresWindow::on_Btn_Adicionar_clicked()
 {
     Add_motor Janela_adicionar_motor(this);
     Janela_adicionar_motor.exec();
+
+    //Ao fechar a Janela de adicionar motor, os dados do tablewidget serão atualizados
+    Atualiza_Tabela();
 }
 QString Verifica_Caracteristica(int indice)
 {
@@ -223,14 +219,15 @@ void MotoresWindow::on_Btn_Excluir_clicked()
 
 void MotoresWindow::on_Btn_Atualizar_clicked()
 {
-    ui->tableWidget->setRowCount(0);
-    Preenche_Tabela();
+    Atualiza_Tabela();
 }
 
 void MotoresWindow::on_Btn_Alterar_clicked()
 {
     Edit_Motor Janela_alterar_motor(this);
     Janela_alterar_motor.exec();
+
+    Atualiza_Tabela();
 }
 
 void MotoresWindow::on_tableWidget_cellClicked(int row, int column)

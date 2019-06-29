@@ -17,6 +17,9 @@ class MotoresWindow : public QDialog
 public:
     explicit MotoresWindow(QWidget *parent = nullptr);
     ~MotoresWindow();
+
+    void Atualiza_Tabela();
+
     void Preenche_Tabela();
 
     void Propriedades_Tabela();

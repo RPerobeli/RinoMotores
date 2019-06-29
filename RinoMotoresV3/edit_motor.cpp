@@ -32,8 +32,15 @@ void Edit_Motor::on_BtnOK_clicked()
 
     //Resistra os valores obtidos no banco de dados, caso sucesso, limpa todas as células para receberem um novo valor
     QSqlQuery query;
-    query.prepare("update tb_Motores set Fabricante= '"+fab_str+"', Tensão= '"+tensao_str+"', CorrenteMax= '"+Imax_str+"', CorrenteMin= '"+Imin_str+"', RotaçãoMax = '"+Rot_max_str+"', TorqueMax= '"+T_max_str+"', Preço= '"+Preco_str+"' where id ='"+id_str+"' ");
-     if(query.exec())
+    query.prepare("update tb_Motores "
+                  "set Fabricante= '"+fab_str+"', "
+                  "Tensão= '"+tensao_str+"', "
+                  "CorrenteMax= '"+Imax_str+"', "
+                  "CorrenteMin= '"+Imin_str+"', "
+                  "RotaçãoMax= '"+Rot_max_str+"', "
+                  "TorqueMax= '"+T_max_str+"', "
+                  "Preço= '"+Preco_str+"' where id ='"+id_str+"' ");
+    if(query.exec())
      {
         //tab.Preenche_Tabela();
         QMessageBox::information(this,"","Sucesso");
@@ -48,7 +55,7 @@ void Edit_Motor::on_BtnOK_clicked()
         ui->Edit_id->setFocus();
 
      }
-     else
+    else
      {
         qDebug()<<"Erro ao alterar registro";
      }
@@ -61,17 +68,16 @@ void Edit_Motor::on_Edit_id_editingFinished()
     query.prepare("select * from tb_Motores where id ='"+id_atual+"'");
     if(query.exec())
     {
-        while(query.next())
-        {
-            ui->Edit_Fabricante->setText(query.value(1).toString());
-            ui->Edit_Tensao->setText(query.value(2).toString());
-            ui->Edit_CurrMax->setText(query.value(3).toString());
-            ui->Edit_CurrMin->setText(query.value(4).toString());
-            ui->Edit_Rot->setText(query.value(5).toString());
-            ui->Edit_Torque->setText(query.value(6).toString());
-            ui->Edit_Preco->setText(query.value(7).toString());
-            ui->Edit_Fabricante->setFocus();
-        }
+        query.first();
+        ui->Edit_Fabricante->setText(query.value(1).toString());
+        ui->Edit_Tensao->setText(query.value(2).toString());
+        ui->Edit_CurrMax->setText(query.value(3).toString());
+        ui->Edit_CurrMin->setText(query.value(4).toString());
+        ui->Edit_Rot->setText(query.value(5).toString());
+        ui->Edit_Torque->setText(query.value(6).toString());
+        ui->Edit_Preco->setText(query.value(7).toString());
+        ui->Edit_Fabricante->setFocus();
+
     }
     else
     {

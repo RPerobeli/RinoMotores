@@ -193,7 +193,7 @@ public:
         ___qtablewidgetitem5->setText(QApplication::translate("MotoresWindow", "Torque M\303\241x", nullptr));
         QTableWidgetItem *___qtablewidgetitem6 = tableWidget->horizontalHeaderItem(6);
         ___qtablewidgetitem6->setText(QApplication::translate("MotoresWindow", "Pre\303\247o", nullptr));
-        Btn_Atualizar->setText(QApplication::translate("MotoresWindow", "Atualizar", nullptr));
+        Btn_Atualizar->setText(QApplication::translate("MotoresWindow", "Atualizar Tabela", nullptr));
     } // retranslateUi
 
 };

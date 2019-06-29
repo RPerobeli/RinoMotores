@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>575</width>
-    <height>414</height>
+    <width>580</width>
+    <height>579</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,25 +16,12 @@
   <property name="styleSheet">
    <string notr="true">background-color:#fff</string>
   </property>
-  <widget class="QLabel" name="label_ImagemCG">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>200</y>
-     <width>331</width>
-     <height>171</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_titulo">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>551</width>
+     <width>561</width>
      <height>51</height>
     </rect>
    </property>
@@ -57,8 +44,8 @@ color:#fff;</string>
   <widget class="QPushButton" name="Btn_Avisos">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>70</y>
+     <x>240</x>
+     <y>80</y>
      <width>93</width>
      <height>28</height>
     </rect>
@@ -71,101 +58,264 @@ color:#fff;</string>
     <string>Avisos</string>
    </property>
   </widget>
+  <widget class="QLabel" name="Imagem">
+   <property name="geometry">
+    <rect>
+     <x>31</x>
+     <y>350</y>
+     <width>351</width>
+     <height>211</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>img_CG.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
   <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>110</y>
-     <width>181</width>
-     <height>49</height>
+     <x>30</x>
+     <y>117</y>
+     <width>168</width>
+     <height>215</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout_3">
     <item>
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="label_Massa">
       <property name="text">
-       <string>Quantidade de motores:</string>
+       <string>Massa do Robô (g):</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QComboBox" name="comboBox_Pesquisa">
-      <property name="styleSheet">
-       <string notr="true">background-color:#c73232;
-color:#fff;</string>
+     <widget class="QLineEdit" name="Edit_Massa"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_raio">
+      <property name="text">
+       <string>Raio da Roda (mm):</string>
       </property>
-      <item>
-       <property name="text">
-        <string>Selecione</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>1 motor para 2 rodas</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>2 motores para 2 rodas</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>2 motores para 4 rodas</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>4 motores para 4 rodas</string>
-       </property>
-      </item>
      </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="Edit_Raio"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_comprimento">
+      <property name="text">
+       <string>Comprimento do robô (mm):</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="label_L">
+        <property name="text">
+         <string>L: </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="Edit_Comprimento"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_Cg">
+      <property name="text">
+       <string>Centro de Gravidade (mm):</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="label_X">
+        <property name="text">
+         <string>X:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="Edit_Cg"/>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
   <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>110</y>
-     <width>110</width>
-     <height>49</height>
+     <x>230</x>
+     <y>120</y>
+     <width>128</width>
+     <height>157</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <layout class="QVBoxLayout" name="verticalLayout_4">
     <item>
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="label_Gravidade">
       <property name="text">
        <string>Gravidade (m/s²):</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEdit_6"/>
+     <widget class="QLineEdit" name="Edit_Gravidade"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_coefAtrito">
+      <property name="text">
+       <string>Coeficiente de Atrito :</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="Edit_CoefAtrito"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_Forca">
+      <property name="text">
+       <string>Forca Resistente (N) :</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="Edit_Forca"/>
     </item>
    </layout>
   </widget>
   <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>380</y>
-     <width>241</width>
-     <height>27</height>
+     <x>391</x>
+     <y>120</y>
+     <width>171</width>
+     <height>190</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <layout class="QVBoxLayout" name="verticalLayout_6">
     <item>
-     <widget class="QPushButton" name="BtnOK">
-      <property name="styleSheet">
-       <string notr="true">background-color:#c73232;
+     <layout class="QVBoxLayout" name="verticalLayout_5">
+      <item>
+       <widget class="QLabel" name="label_QtdMotores">
+        <property name="text">
+         <string>Quantidade de motores:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_QtdMotores">
+        <property name="styleSheet">
+         <string notr="true">background-color:#c73232;
 color:#fff;</string>
-      </property>
-      <property name="text">
-       <string>Ok</string>
-      </property>
-     </widget>
+        </property>
+        <item>
+         <property name="text">
+          <string>Selecione</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>1 motor para 2 rodas</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>2 motores para 2 rodas</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>2 motores para 4 rodas</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>4 motores para 4 rodas</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_Aux1">
+        <property name="text">
+         <string>Posição das  rodas (mm):</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QLabel" name="label_PosicaoEixo1">
+          <property name="text">
+           <string>Posição Eixo traseiro:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QLabel" name="label_E1">
+            <property name="text">
+             <string>E1: </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="Edit_PosicaoEixo1"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
     </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QLabel" name="label_PosicaoEixo2">
+        <property name="text">
+         <string>Posição eixo dianteiro:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <widget class="QLabel" name="label_E2">
+          <property name="text">
+           <string>E2: </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="Edit_PosicaoEixo2"/>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>490</y>
+     <width>131</width>
+     <height>59</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_7">
     <item>
      <widget class="QPushButton" name="Btn_Cancel">
       <property name="styleSheet">
@@ -177,91 +327,16 @@ color:#fff;</string>
       </property>
      </widget>
     </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>110</y>
-     <width>162</width>
-     <height>277</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout_8">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
-      <item>
-       <widget class="QLabel" name="label_Massa">
-        <property name="text">
-         <string>Massa do Robô (g):</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="Edit_Massa"/>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout_4">
-      <item>
-       <widget class="QLabel" name="label_raio">
-        <property name="text">
-         <string>Raio da Roda (mm):</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="Edit_Raio"/>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout_7">
-      <item>
-       <widget class="QLabel" name="label_Cg">
-        <property name="text">
-         <string>Centro de Gravidade (mm):</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QLineEdit" name="Edit_Cg"/>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout_5">
-      <item>
-       <widget class="QLabel" name="label_coefAtrito">
-        <property name="text">
-         <string>Coeficiente de Atrito :</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="Edit_CoefAtrito"/>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout_6">
-      <item>
-       <widget class="QLabel" name="label_Forca">
-        <property name="text">
-         <string>Forca Resistente (N) :</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="Edit_Forca"/>
-      </item>
-     </layout>
+     <widget class="QPushButton" name="BtnOK">
+      <property name="styleSheet">
+       <string notr="true">background-color:#c73232;
+color:#fff;</string>
+      </property>
+      <property name="text">
+       <string>Ok</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
