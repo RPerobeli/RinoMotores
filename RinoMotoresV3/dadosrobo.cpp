@@ -110,7 +110,7 @@ void DadosRobo::on_BtnOK_clicked()
     double E2 = E2_str.toDouble();
 
     //recebe se há algum valor invalido
-    bool CloseWindow = Valida_Robo(Massa,Raio,Comprimento,CentroDeGravidade,Gravidade,ForcaRes,CoefAtrito,E1,E2);
+    bool CloseWindow = Valida_Robo_Minisumo(Massa,Raio,Comprimento,CentroDeGravidade,Gravidade,CoefAtrito,ForcaRes,E1,E2);
 
 
     //Resistra os valores obtidos no banco de dados, caso sucesso, limpa todas as células para receberem um novo valor
@@ -164,62 +164,83 @@ void DadosRobo::on_comboBox_QtdMotores_currentIndexChanged(int index)
 
 }
 
-bool DadosRobo::Valida_Robo(double massa, double raio,  double L, double CG, double g, double mi, double F_res, double e1, double e2 )
+bool DadosRobo::Valida_Robo_Minisumo(double massa, double raio,  double L, double CG, double g, double mi, double F_res, double e1, double e2 )
 {
-    //Função que verifica se os dados preenchidos são válidos, se o robô pertence à categoria minisumo
+    //Função que verifica se os dados preenchidos são válidos, se o robô pertence à categoria MINISUMO, se validos, retornarao true
     bool respostas[9];
     for(int i =0;i<9;i++)
     {
-        respostas[i]= true;
+        respostas[i]= false;
     }
 
-    if(massa <= 0) //massa em gramas
+    if(massa > 0 && massa < 500) //massa em gramas
+    {
+        respostas[0]= true;
+    }else
     {
         ui->label_Massa->setStyleSheet("color:#c73232;");
-        respostas[0]= false;
     }
-    if((raio <=0)||(raio>L/2)) //dimensões em mm
+    if((raio > 0)&&(raio<=L/2)) //dimensões em mm
+    {
+        respostas[1] = true;
+    }else
     {
         ui->label_raio->setStyleSheet("color:#c73232;");
-        respostas[1] = false;
     }
-    if(L <= 0) //comprimento
+    if(L > 0) //comprimento
+    {
+        respostas[2]= true;
+    }else
     {
         ui->label_comprimento->setStyleSheet("color:#c73232;");
-        respostas[2]= false;
     }
-    if(CG <=0)
+    if(CG > 0)
+    {
+        respostas[3]= true;
+    }else
     {
         ui->label_Cg->setStyleSheet("color:#c73232;");
-        respostas[3]= false;
     }
-    if(g<=0)
+    if(g > 0)
+    {
+        respostas[4]= true;
+    }else
     {
         ui->label_Gravidade->setStyleSheet("color:#c73232;");
-        respostas[4]= false;
     }
-    if(mi<0 || mi>1)
+    if(mi>=0 && mi<=1)
+    {
+        respostas[5]= true;
+    }else
     {
         ui->label_coefAtrito->setStyleSheet("color:#c73232;");
-        respostas[5]= false;
     }
-    if(F_res<=0)
+    if(F_res>0)
     {
-        ui->label_Forca->setStyleSheet("color:#c73232;");
-        respostas[6]= false;
+        respostas[6]= true;
+    }else
+    {
+         ui->label_Forca->setStyleSheet("color:#c73232;");
     }
-    if(e1<=0)
+    if(e1>0)
+    {
+        respostas[7]= true;
+    }else
     {
         ui->label_PosicaoEixo1->setStyleSheet("color:#c73232");
-        respostas[7]= false;
     }
     if (ui->Edit_PosicaoEixo2->isEnabled())
     {
-        if(e2<=0)
+        if(e2>0)
+        {
+            respostas[8]= true;
+        }else
         {
             ui->label_PosicaoEixo2->setStyleSheet("color:#c73232");
-            respostas[8]= false;
         }
+    }else
+    {
+        respostas[8]=true;
     }
 
     bool respostaFinal = true;
@@ -232,4 +253,34 @@ bool DadosRobo::Valida_Robo(double massa, double raio,  double L, double CG, dou
         }
     }
     return respostaFinal;
+}
+
+bool DadosRobo::Valida_Robo_Seguidor(double massa, double raio, double L, double CG, double g, double mi, double F_res, double e1, double e2)
+{
+    //Função que verifica se os dados preenchidos são válidos, se o robô pertence à categoria SEGUIDOR DE LINHA, se validos, retornarao true
+    bool respostas[9];
+    for(int i =0;i<9;i++)
+    {
+        respostas[i]= false;
+    }
+}
+
+bool DadosRobo::Valida_Robo_Vsss(double massa, double raio, double L, double CG, double g, double mi, double F_res, double e1, double e2)
+{
+    //Função que verifica se os dados preenchidos são válidos, se o robô pertence à categoria VERY SMALL SIZE SOCCER, se validos, retornarao true
+    bool respostas[9];
+    for(int i =0;i<9;i++)
+    {
+        respostas[i]= false;
+    }
+}
+
+bool DadosRobo::Valida_Robo(double massa, double raio, double L, double CG, double g, double mi, double F_res, double e1, double e2)
+{
+    //Função que verifica se os dados preenchidos são válidos (basicamente, numeros maiores que zero), para QUALQUER MOTOR
+    bool respostas[9];
+    for(int i =0;i<9;i++)
+    {
+        respostas[i]= false;
+    }
 }

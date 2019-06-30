@@ -18,6 +18,12 @@ public:
     explicit DadosRobo(QWidget *parent = nullptr);
     ~DadosRobo();
 
+    bool Valida_Robo_Minisumo(double massa, double raio, double L, double CG, double g, double mi, double F_res, double e1, double e2);
+
+    bool Valida_Robo_Vsss(double massa, double raio, double L, double CG, double g, double mi, double F_res, double e1, double e2);
+
+    bool Valida_Robo_Seguidor(double massa, double raio, double L, double CG, double g, double mi, double F_res, double e1, double e2);
+
     bool Valida_Robo(double massa, double raio, double L, double CG, double g, double mi, double F_res, double e1, double e2);
 
 private slots:
