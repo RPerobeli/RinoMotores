@@ -9,7 +9,7 @@
 
 
 
-DadosRobo::DadosRobo(QWidget *parent) :
+DadosRobo::DadosRobo(QWidget *parent, int indiceAplicacao) :
     QDialog(parent),
     ui(new Ui::DadosRobo)
 {
@@ -173,7 +173,7 @@ bool DadosRobo::Valida_Robo_Minisumo(double massa, double raio,  double L, doubl
         respostas[i]= false;
     }
 
-    if(massa > 0 && massa < 500) //massa em gramas
+    if(massa > 0 && massa <= 500) //massa em gramas
     {
         respostas[0]= true;
     }else
@@ -275,7 +275,7 @@ bool DadosRobo::Valida_Robo_Vsss(double massa, double raio, double L, double CG,
     }
 }
 
-bool DadosRobo::Valida_Robo(double massa, double raio, double L, double CG, double g, double mi, double F_res, double e1, double e2)
+bool DadosRobo::Valida_Robo_Outros(double massa, double raio, double L, double CG, double g, double mi, double F_res, double e1, double e2)
 {
     //Função que verifica se os dados preenchidos são válidos (basicamente, numeros maiores que zero), para QUALQUER MOTOR
     bool respostas[9];

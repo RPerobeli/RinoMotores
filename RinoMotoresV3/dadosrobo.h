@@ -15,7 +15,7 @@ class DadosRobo : public QDialog
     Q_OBJECT
 
 public:
-    explicit DadosRobo(QWidget *parent = nullptr);
+    explicit DadosRobo(QWidget *parent = nullptr, int indiceAplicacao = NULL);
     ~DadosRobo();
 
     bool Valida_Robo_Minisumo(double massa, double raio, double L, double CG, double g, double mi, double F_res, double e1, double e2);
@@ -24,7 +24,7 @@ public:
 
     bool Valida_Robo_Seguidor(double massa, double raio, double L, double CG, double g, double mi, double F_res, double e1, double e2);
 
-    bool Valida_Robo(double massa, double raio, double L, double CG, double g, double mi, double F_res, double e1, double e2);
+    bool Valida_Robo_Outros(double massa, double raio, double L, double CG, double g, double mi, double F_res, double e1, double e2);
 
 private slots:
     void on_Btn_Avisos_clicked();

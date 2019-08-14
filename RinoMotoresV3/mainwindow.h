@@ -24,6 +24,10 @@ public:
 
     void Limpa_CondicoesDeContorno();
 
+    void Calc_Dados_Auxiliares();
+
+    double* Calc_Reacoes_Apoio(double P, double L, double cg, double e1);
+
 private slots:
     void on_Btn_Motores_clicked();
 

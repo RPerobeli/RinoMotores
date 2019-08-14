@@ -29,6 +29,10 @@ void Edit_Motor::on_BtnOK_clicked()
     QString Rot_max_str = ui->Edit_Rot->text();
     QString T_max_str = ui->Edit_Torque->text();
     QString Preco_str = ui->Edit_Preco->text();
+    QString GearRatio_str = ui->Edit_Reducao->text();
+    QString K_t_str = ui->Edit_Kt->text();
+    QString K_v_str = ui->Edit_Kv->text();
+
 
     //Resistra os valores obtidos no banco de dados, caso sucesso, limpa todas as células para receberem um novo valor
     QSqlQuery query;
@@ -39,21 +43,14 @@ void Edit_Motor::on_BtnOK_clicked()
                   "CorrenteMin= '"+Imin_str+"', "
                   "RotaçãoMax= '"+Rot_max_str+"', "
                   "TorqueMax= '"+T_max_str+"', "
-                  "Preço= '"+Preco_str+"' where id ='"+id_str+"' ");
+                  "Preço= '"+Preco_str+"', "
+                  "Reducao= '"+GearRatio_str+"', "
+                  "Kt= '"+K_t_str+"', "
+                  "Kv= '"+K_v_str+"', where id ='"+id_str+"' ");
     if(query.exec())
      {
         //tab.Preenche_Tabela();
         QMessageBox::information(this,"","Sucesso");
-        ui->Edit_id->clear();
-        ui->Edit_Fabricante->clear();
-        ui->Edit_Tensao->clear();
-        ui->Edit_CurrMax->clear();
-        ui->Edit_CurrMin->clear();
-        ui->Edit_Rot->clear();
-        ui->Edit_Torque->clear();
-        ui->Edit_Preco->clear();
-        ui->Edit_id->setFocus();
-
      }
     else
      {
@@ -83,4 +80,19 @@ void Edit_Motor::on_Edit_id_editingFinished()
     {
        qDebug()<<"Erro";
     }
+}
+
+void Edit_Motor::on_Btn_Limpar_clicked()
+{
+    ui->Edit_Fabricante->clear();
+    ui->Edit_Tensao->clear();
+    ui->Edit_CurrMax->clear();
+    ui->Edit_CurrMin->clear();
+    ui->Edit_Rot->clear();
+    ui->Edit_Torque->clear();
+    ui->Edit_Preco->clear();
+    ui->Edit_Reducao->clear();
+    ui->Edit_Kv->clear();
+    ui->Edit_Kt->clear();
+    ui->Edit_Fabricante->setFocus();
 }

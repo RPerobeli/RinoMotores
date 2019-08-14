@@ -37,7 +37,8 @@ HEADERS += \
     add_motor.h \
     results.h \
     edit_motor.h \
-    dadosrobo.h
+    dadosrobo.h \
+    libcalculus.h
 
 FORMS += \
         mainwindow.ui \

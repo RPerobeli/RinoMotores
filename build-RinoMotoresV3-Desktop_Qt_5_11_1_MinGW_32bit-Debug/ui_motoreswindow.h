@@ -57,6 +57,9 @@ public:
         comboBox_Pesquisa->addItem(QString());
         comboBox_Pesquisa->addItem(QString());
         comboBox_Pesquisa->addItem(QString());
+        comboBox_Pesquisa->addItem(QString());
+        comboBox_Pesquisa->addItem(QString());
+        comboBox_Pesquisa->addItem(QString());
         comboBox_Pesquisa->setObjectName(QStringLiteral("comboBox_Pesquisa"));
         comboBox_Pesquisa->setGeometry(QRect(10, 620, 141, 24));
         comboBox_Pesquisa->setStyleSheet(QLatin1String("background-color:#c73232;\n"
@@ -132,8 +135,8 @@ public:
         verticalLayout->addWidget(label);
 
         tableWidget = new QTableWidget(layoutWidget1);
-        if (tableWidget->columnCount() < 7)
-            tableWidget->setColumnCount(7);
+        if (tableWidget->columnCount() < 10)
+            tableWidget->setColumnCount(10);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
         tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
@@ -148,6 +151,12 @@ public:
         tableWidget->setHorizontalHeaderItem(5, __qtablewidgetitem5);
         QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
         tableWidget->setHorizontalHeaderItem(6, __qtablewidgetitem6);
+        QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(7, __qtablewidgetitem7);
+        QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(8, __qtablewidgetitem8);
+        QTableWidgetItem *__qtablewidgetitem9 = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(9, __qtablewidgetitem9);
         tableWidget->setObjectName(QStringLiteral("tableWidget"));
 
         verticalLayout->addWidget(tableWidget);
@@ -172,6 +181,9 @@ public:
         comboBox_Pesquisa->setItemText(3, QApplication::translate("MotoresWindow", "CorrenteMin", nullptr));
         comboBox_Pesquisa->setItemText(4, QApplication::translate("MotoresWindow", "Rota\303\247\303\243oMax", nullptr));
         comboBox_Pesquisa->setItemText(5, QApplication::translate("MotoresWindow", "TorqueMax", nullptr));
+        comboBox_Pesquisa->setItemText(6, QApplication::translate("MotoresWindow", "Reducao", nullptr));
+        comboBox_Pesquisa->setItemText(7, QApplication::translate("MotoresWindow", "Kt", nullptr));
+        comboBox_Pesquisa->setItemText(8, QApplication::translate("MotoresWindow", "Kv", nullptr));
 
         Btn_Consultar->setText(QApplication::translate("MotoresWindow", "Consultar Motor", nullptr));
         Btn_Excluir->setText(QApplication::translate("MotoresWindow", "Excluir Selecionados", nullptr));
@@ -182,17 +194,23 @@ public:
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("MotoresWindow", "Fabricante", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("MotoresWindow", "Tens\303\243o", nullptr));
+        ___qtablewidgetitem1->setText(QApplication::translate("MotoresWindow", "Redu\303\247\303\243o", nullptr));
         QTableWidgetItem *___qtablewidgetitem2 = tableWidget->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("MotoresWindow", "Corrente m\303\255n", nullptr));
+        ___qtablewidgetitem2->setText(QApplication::translate("MotoresWindow", "Kt", nullptr));
         QTableWidgetItem *___qtablewidgetitem3 = tableWidget->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QApplication::translate("MotoresWindow", "Corrente M\303\241x", nullptr));
+        ___qtablewidgetitem3->setText(QApplication::translate("MotoresWindow", "Kv", nullptr));
         QTableWidgetItem *___qtablewidgetitem4 = tableWidget->horizontalHeaderItem(4);
-        ___qtablewidgetitem4->setText(QApplication::translate("MotoresWindow", "Rota\303\247\303\243o M\303\241x", nullptr));
+        ___qtablewidgetitem4->setText(QApplication::translate("MotoresWindow", "Tens\303\243o", nullptr));
         QTableWidgetItem *___qtablewidgetitem5 = tableWidget->horizontalHeaderItem(5);
-        ___qtablewidgetitem5->setText(QApplication::translate("MotoresWindow", "Torque M\303\241x", nullptr));
+        ___qtablewidgetitem5->setText(QApplication::translate("MotoresWindow", "Corrente m\303\255n", nullptr));
         QTableWidgetItem *___qtablewidgetitem6 = tableWidget->horizontalHeaderItem(6);
-        ___qtablewidgetitem6->setText(QApplication::translate("MotoresWindow", "Pre\303\247o", nullptr));
+        ___qtablewidgetitem6->setText(QApplication::translate("MotoresWindow", "Corrente M\303\241x", nullptr));
+        QTableWidgetItem *___qtablewidgetitem7 = tableWidget->horizontalHeaderItem(7);
+        ___qtablewidgetitem7->setText(QApplication::translate("MotoresWindow", "Rota\303\247\303\243o M\303\241x", nullptr));
+        QTableWidgetItem *___qtablewidgetitem8 = tableWidget->horizontalHeaderItem(8);
+        ___qtablewidgetitem8->setText(QApplication::translate("MotoresWindow", "Torque M\303\241x", nullptr));
+        QTableWidgetItem *___qtablewidgetitem9 = tableWidget->horizontalHeaderItem(9);
+        ___qtablewidgetitem9->setText(QApplication::translate("MotoresWindow", "Pre\303\247o", nullptr));
         Btn_Atualizar->setText(QApplication::translate("MotoresWindow", "Atualizar Tabela", nullptr));
     } // retranslateUi
 

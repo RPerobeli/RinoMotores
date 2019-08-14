@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>580</width>
+    <width>642</width>
     <height>579</height>
    </rect>
   </property>
@@ -16,54 +16,12 @@
   <property name="styleSheet">
    <string notr="true">background-color:#fff</string>
   </property>
-  <widget class="QLabel" name="label_titulo">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>561</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>16</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color:#c73232;
-color:#fff;</string>
-   </property>
-   <property name="text">
-    <string>Dados Externos ao Motor</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="Btn_Avisos">
-   <property name="geometry">
-    <rect>
-     <x>240</x>
-     <y>80</y>
-     <width>93</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color:#305dbf;
-color:#fff;</string>
-   </property>
-   <property name="text">
-    <string>Avisos</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="Imagem">
    <property name="geometry">
     <rect>
      <x>31</x>
      <y>350</y>
-     <width>351</width>
+     <width>321</width>
      <height>211</height>
     </rect>
    </property>
@@ -77,7 +35,7 @@ color:#fff;</string>
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -151,12 +109,12 @@ color:#fff;</string>
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>230</x>
      <y>120</y>
-     <width>128</width>
+     <width>192</width>
      <height>157</height>
     </rect>
    </property>
@@ -174,7 +132,7 @@ color:#fff;</string>
     <item>
      <widget class="QLabel" name="label_coefAtrito">
       <property name="text">
-       <string>Coeficiente de Atrito :</string>
+       <string>Coeficiente de Atrito (dinâmico) :</string>
       </property>
      </widget>
     </item>
@@ -193,10 +151,10 @@ color:#fff;</string>
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>391</x>
+     <x>450</x>
      <y>120</y>
      <width>171</width>
      <height>190</height>
@@ -306,16 +264,27 @@ color:#fff;</string>
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>420</x>
+     <x>500</x>
      <y>490</y>
      <width>131</width>
      <height>59</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_7">
+    <item>
+     <widget class="QPushButton" name="BtnOK">
+      <property name="styleSheet">
+       <string notr="true">background-color:#c73232;
+color:#fff;</string>
+      </property>
+      <property name="text">
+       <string>Ok</string>
+      </property>
+     </widget>
+    </item>
     <item>
      <widget class="QPushButton" name="Btn_Cancel">
       <property name="styleSheet">
@@ -327,16 +296,77 @@ color:#fff;</string>
       </property>
      </widget>
     </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>611</width>
+     <height>69</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_8">
     <item>
-     <widget class="QPushButton" name="BtnOK">
+     <widget class="QLabel" name="label_titulo">
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">background-color:#c73232;
 color:#fff;</string>
       </property>
       <property name="text">
-       <string>Ok</string>
+       <string>Dados Externos ao Motor</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="Btn_Avisos">
+        <property name="styleSheet">
+         <string notr="true">background-color:#305dbf;
+color:#fff;</string>
+        </property>
+        <property name="text">
+         <string>Avisos</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>

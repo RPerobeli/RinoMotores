@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>269</width>
-    <height>273</height>
+    <height>366</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,107 +16,6 @@
   <property name="styleSheet">
    <string notr="true">background-color:#fff</string>
   </property>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>50</y>
-     <width>246</width>
-     <height>213</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QLabel" name="label_Fabricante">
-        <property name="text">
-         <string>Fabricante</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="Edit_Fabricante"/>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_CurrMax">
-        <property name="text">
-         <string>Corrente Máx(A)</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="Edit_CurrMax"/>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_rot">
-        <property name="text">
-         <string>Rotação Máx(rpm)</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="Edit_Rot"/>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_preco">
-        <property name="text">
-         <string>Preço(R$)</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="Edit_Preco"/>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="QLabel" name="label_Tensao">
-        <property name="text">
-         <string>Tensão(V)</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="Edit_Tensao"/>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_CurrMin">
-        <property name="text">
-         <string>Corrente Mín(A)</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="Edit_CurrMin"/>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_Torq">
-        <property name="text">
-         <string>Torque Máx (kgf.mm)</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="Edit_Torque"/>
-      </item>
-      <item>
-       <widget class="QPushButton" name="BtnOK">
-        <property name="styleSheet">
-         <string notr="true">background-color:#c73232;
-color:#fff;</string>
-        </property>
-        <property name="text">
-         <string>Ok</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-   </layout>
-  </widget>
   <widget class="QLabel" name="label_titulo">
    <property name="geometry">
     <rect>
@@ -142,6 +41,152 @@ color:#c73232;</string>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
    </property>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>129</x>
+     <y>52</y>
+     <width>127</width>
+     <height>297</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="label_Tensao">
+      <property name="text">
+       <string>Tensão(V)</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="Edit_Tensao"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_CurrMin">
+      <property name="text">
+       <string>Corrente Mín(A)</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="Edit_CurrMin"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_Torq">
+      <property name="text">
+       <string>Torque Máx (kgf.mm)</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="Edit_Torque"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_Reducao">
+      <property name="text">
+       <string>Reducao</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="Edit_Reducao"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_Kv">
+      <property name="text">
+       <string>Kv ()</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="Edit_Kv"/>
+    </item>
+    <item>
+     <widget class="QPushButton" name="BtnOK">
+      <property name="styleSheet">
+       <string notr="true">background-color:#c73232;
+color:#fff;</string>
+      </property>
+      <property name="text">
+       <string>Ok</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>12</x>
+     <y>52</y>
+     <width>110</width>
+     <height>297</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="QLabel" name="label_Fabricante">
+      <property name="text">
+       <string>Fabricante</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="Edit_Fabricante"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_CurrMax">
+      <property name="text">
+       <string>Corrente Máx(A)</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="Edit_CurrMax"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_rot">
+      <property name="text">
+       <string>Rotação Máx(rpm)</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="Edit_Rot"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_preco">
+      <property name="text">
+       <string>Preço(R$)</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="Edit_Preco"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_Kt">
+      <property name="text">
+       <string>Kt ())</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="Edit_Kt"/>
+    </item>
+    <item>
+     <widget class="QPushButton" name="Btn_Limpar">
+      <property name="styleSheet">
+       <string notr="true">background-color:#c73232;
+color:#fff;</string>
+      </property>
+      <property name="text">
+       <string>Limpar</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

@@ -63,7 +63,7 @@ MotoresWindow::MotoresWindow(QWidget *parent) :
 void MotoresWindow::Propriedades_Tabela()
 {
     //Insere na tabela os titulos das colunas e define um tamanho menor para a coluna de ID
-    QStringList cabecalho = {"ID","Fabricante","Tensão(v)","Corrente Máx(A)","Corrente Mín(A)","Rotação Máx(rpm)","Torque Máx(kgf.mm)","Preço(R$)"};
+    QStringList cabecalho = {"ID","Fabricante","Redução","Kt()","Kv(V/rpm)","Tensão(v)","Corrente Máx(A)","Corrente Mín(A)","Rotação Máx(rpm)","Torque Máx(kgf.mm)","Preço(R$)"};
     ui->tableWidget->setHorizontalHeaderLabels(cabecalho);
     ui->tableWidget->setColumnWidth(0,30);
 
@@ -79,7 +79,7 @@ void MotoresWindow::Preenche_Tabela()
     if(query.exec())
         {
             int linha = 0;
-            ui->tableWidget->setColumnCount(8);
+            ui->tableWidget->setColumnCount(11);
             while(query.next())
                 {
                     ui->tableWidget->insertRow(linha);
@@ -91,6 +91,9 @@ void MotoresWindow::Preenche_Tabela()
                     ui->tableWidget->setItem(linha,5,new QTableWidgetItem(query.value(5).toString()));
                     ui->tableWidget->setItem(linha,6,new QTableWidgetItem(query.value(6).toString()));
                     ui->tableWidget->setItem(linha,7,new QTableWidgetItem(query.value(7).toString()));
+                    ui->tableWidget->setItem(linha,8,new QTableWidgetItem(query.value(8).toString()));
+                    ui->tableWidget->setItem(linha,9,new QTableWidgetItem(query.value(9).toString()));
+                    ui->tableWidget->setItem(linha,10,new QTableWidgetItem(query.value(10).toString()));
                     linha++;
                 }
             Propriedades_Tabela();
@@ -153,6 +156,15 @@ QString Verifica_Caracteristica(int indice)
    case 6:
        corresp="Preço";
        break;
+   case 7:
+       corresp="Reducao";
+       break;
+   case 8:
+       corresp="Kt";
+       break;
+   case 9:
+       corresp="Kv";
+       break;
    }
    return corresp;
 
@@ -190,6 +202,9 @@ void MotoresWindow::on_Btn_Consultar_clicked()
            ui->tableWidget->setItem(linha,5,new QTableWidgetItem(query.value(5).toString()));
            ui->tableWidget->setItem(linha,6,new QTableWidgetItem(query.value(6).toString()));
            ui->tableWidget->setItem(linha,7,new QTableWidgetItem(query.value(7).toString()));
+           ui->tableWidget->setItem(linha,8,new QTableWidgetItem(query.value(8).toString()));
+           ui->tableWidget->setItem(linha,9,new QTableWidgetItem(query.value(9).toString()));
+           ui->tableWidget->setItem(linha,10,new QTableWidgetItem(query.value(10).toString()));
            linha++;
         }
         Propriedades_Tabela();

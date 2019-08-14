@@ -59,6 +59,21 @@ color:#fff;</string>
      <string>TorqueMax</string>
     </property>
    </item>
+   <item>
+    <property name="text">
+     <string>Reducao</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Kt</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Kv</string>
+    </property>
+   </item>
   </widget>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
@@ -179,6 +194,21 @@ color:#fff;</string>
       <column>
        <property name="text">
         <string>Fabricante</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Redução</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Kt</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Kv</string>
        </property>
       </column>
       <column>

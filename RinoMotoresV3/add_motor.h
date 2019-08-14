@@ -24,6 +24,8 @@ public:
 private slots:
     void on_BtnOK_clicked();
 
+    void on_Btn_Limpar_clicked();
+
 private:
     Ui::Add_motor *ui;
 };

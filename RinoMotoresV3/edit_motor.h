@@ -20,6 +20,8 @@ private slots:
 
     void on_Edit_id_editingFinished();
 
+    void on_Btn_Limpar_clicked();
+
 private:
     Ui::Edit_Motor *ui;
 };
