@@ -29,7 +29,7 @@ public:
     QWidget *centralWidget;
     QLabel *Imagem;
     QPushButton *Btn_Instrucoes;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout;
     QLabel *label_3;
@@ -61,10 +61,10 @@ public:
         Btn_Instrucoes->setGeometry(QRect(10, 20, 93, 28));
         Btn_Instrucoes->setStyleSheet(QLatin1String("background-color:#305dbf;\n"
 "color:#fff;"));
-        widget = new QWidget(centralWidget);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(10, 90, 156, 211));
-        verticalLayout_2 = new QVBoxLayout(widget);
+        layoutWidget = new QWidget(centralWidget);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(10, 90, 156, 211));
+        verticalLayout_2 = new QVBoxLayout(layoutWidget);
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
@@ -72,12 +72,13 @@ public:
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        label_3 = new QLabel(widget);
+        label_3 = new QLabel(layoutWidget);
         label_3->setObjectName(QStringLiteral("label_3"));
 
         verticalLayout->addWidget(label_3);
 
-        comboBox_Aplicacao = new QComboBox(widget);
+        comboBox_Aplicacao = new QComboBox(layoutWidget);
+        comboBox_Aplicacao->addItem(QString());
         comboBox_Aplicacao->addItem(QString());
         comboBox_Aplicacao->addItem(QString());
         comboBox_Aplicacao->addItem(QString());
@@ -88,12 +89,12 @@ public:
 
         verticalLayout->addWidget(comboBox_Aplicacao);
 
-        label_2 = new QLabel(widget);
+        label_2 = new QLabel(layoutWidget);
         label_2->setObjectName(QStringLiteral("label_2"));
 
         verticalLayout->addWidget(label_2);
 
-        comboBox = new QComboBox(widget);
+        comboBox = new QComboBox(layoutWidget);
         comboBox->addItem(QString());
         comboBox->addItem(QString());
         comboBox->addItem(QString());
@@ -105,21 +106,21 @@ public:
 
         verticalLayout->addWidget(comboBox);
 
-        Btn_Motores = new QPushButton(widget);
+        Btn_Motores = new QPushButton(layoutWidget);
         Btn_Motores->setObjectName(QStringLiteral("Btn_Motores"));
         Btn_Motores->setStyleSheet(QLatin1String("background-color:#c73232;\n"
 "color:#fff;"));
 
         verticalLayout->addWidget(Btn_Motores);
 
-        Btn_DadosRobo = new QPushButton(widget);
+        Btn_DadosRobo = new QPushButton(layoutWidget);
         Btn_DadosRobo->setObjectName(QStringLiteral("Btn_DadosRobo"));
         Btn_DadosRobo->setStyleSheet(QLatin1String("background-color:#c73232;\n"
 "color:#fff;"));
 
         verticalLayout->addWidget(Btn_DadosRobo);
 
-        Btn_Calcular = new QPushButton(widget);
+        Btn_Calcular = new QPushButton(layoutWidget);
         Btn_Calcular->setObjectName(QStringLiteral("Btn_Calcular"));
         Btn_Calcular->setStyleSheet(QLatin1String("background-color:#c73232;\n"
 "color:#fff;"));
@@ -156,6 +157,7 @@ public:
         comboBox_Aplicacao->setItemText(1, QApplication::translate("MainWindow", "Mini-sum\303\264", nullptr));
         comboBox_Aplicacao->setItemText(2, QApplication::translate("MainWindow", "Seguidor de Linha", nullptr));
         comboBox_Aplicacao->setItemText(3, QApplication::translate("MainWindow", "VSSS", nullptr));
+        comboBox_Aplicacao->setItemText(4, QApplication::translate("MainWindow", "Outros", nullptr));
 
         label_2->setText(QApplication::translate("MainWindow", "Tipo de motor desejado:", nullptr));
         comboBox->setItemText(0, QApplication::translate("MainWindow", "Selecione", nullptr));

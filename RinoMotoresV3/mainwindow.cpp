@@ -13,7 +13,7 @@
 //Salva o banco de dados em uma variável
 static QSqlDatabase DbMotores = QSqlDatabase::addDatabase("QSQLITE");
 
-static float raioDojo = 36.5;
+
 
 void MainWindow::Database_Verify()
 {
@@ -93,25 +93,52 @@ void MainWindow::on_Btn_Calcular_clicked()
         MsgBox.exec();
     }else
     {
-        //Uma vez que a aplicação é válida, calcular os dados auxiliares
-        Calc_Dados_Auxiliares();
-        //confere qual a aplicação, e resolve o sistema de EDOs
-        switch(indiceAplicacao)
+        QSqlQuery query;
+        query.prepare("select * from tb_CondicoesContorno where excluir = 'true'");
+        if(query.exec())
         {
-            case 1:
-                qDebug()<<"Mini-sumô";
+            //Pega os dados no banco de dados
+            query.first();
+            double Massa = query.value(1).toDouble();
+            double Raio = query.value(2).toDouble();
+            double Comprimento = query.value(3).toDouble();
+            double CentroDeGravidade = query.value(4).toDouble();
+            double Gravidade = query.value(5).toDouble();
+            double CoefAtrito_estatico = query.value(6).toDouble();
+            double ForcaResistente = query.value(7).toDouble();
+            int indice_QtdMotores = query.value(8).toInt();
+            double E1 = query.value(9).toDouble();
+            double E2 = query.value(10).toDouble();
 
-                break;
-            case 2:
-                qDebug()<<"Seguidor";
-                break;
-            case 3:
-                qDebug()<<"VSSS";
-                break;
-            case 4:
-                qDebug()<<"Outros";
-                break;
+            //Uma vez que a aplicação é válida, calcular os dados auxiliares
+            Calc_Dados_Auxiliares(Massa,Comprimento,CentroDeGravidade,Gravidade,CoefAtrito_estatico,indice_QtdMotores,E1,E2);
+
+            //confere qual a aplicação, e resolve o sistema de EDOs
+            switch(indiceAplicacao)
+            {
+                case 1:
+                    qDebug()<<"Mini-sumô";
+                    Matrix2d Result = Resultado_Final_Minisumo(Massa,Raio,ForcaResistente,indice_QtdMotores);
+                    break;
+                case 2:
+                    qDebug()<<"Seguidor";
+                    break;
+                case 3:
+                    qDebug()<<"VSSS";
+                    break;
+                case 4:
+                    qDebug()<<"Outros";
+                    break;
+            }
         }
+        else
+        {
+        QMessageBox MsgBox;
+        MsgBox.setText("Erro ao adquirir os dados do robô");
+        MsgBox.exec();
+        }
+
+
     }
 
 }
@@ -169,26 +196,9 @@ void MainWindow::Limpa_CondicoesDeContorno()
      }
 }
 
-void MainWindow::Calc_Dados_Auxiliares()
+void MainWindow::Calc_Dados_Auxiliares(double Massa, double Comprimento, double CentroDeGravidade, double Gravidade, double CoefAtrito_estatico, int indice_QtdMotores,double E1,double E2)
 {
-    //Função que calcula reações de apoio, forças de atrito, ... COLOCAR MAIS SE TIVER
-    QSqlQuery query;
-    query.prepare("select * from tb_CondicoesContorno where excluir = 'true'");
-    if(query.exec())
-    {
-        //Pega os dados no banco de dados
-        query.first();
-        double Massa = query.value(1).toDouble();
-        double Raio = query.value(2).toDouble();
-        double Comprimento = query.value(3).toDouble();
-        double CentroDeGravidade = query.value(4).toDouble();
-        double Gravidade = query.value(5).toDouble();
-        double CoefAtrito_estatico = query.value(6).toDouble();
-        double ForcaResistente = query.value(7).toDouble();
-        int indice_QtdMotores = query.value(8).toInt();
-        double E1 = query.value(9).toDouble();
-        double E2 = query.value(10).toDouble();
-
+    //Função que calcula reações de apoio, forças de atrito, ... COLOCAR MAIS SE TIVE
         //Calcula reações de apoio:
         double Peso = (Massa*Gravidade)/1000;
         double *reacoes = new double[2];
@@ -205,23 +215,16 @@ void MainWindow::Calc_Dados_Auxiliares()
 
             //Força de atrito na lamina:
             double F_lamina = CoefAtrito_estatico*reacoes[1];
+            //Torque maximo até derrapar:
+            double torqueMaximo = CoefAtrito_estatico*reacoes[0];
 
         }else
         {
             reacoes = Calc_Reacoes_Apoio(Peso, E2, CentroDeGravidade, E1);
+            //Torque maximo até derrapar:
+            double torqueMaximo = CoefAtrito_estatico*reacoes[0];
         }
 
-        //Torque maximo até derrapar:
-        double torqueMaximo = CoefAtrito_estatico*reacoes[0];
-
-
-
-    }else
-    {
-        QMessageBox MsgBox;
-        MsgBox.setText("Erro ao adquirir os dados do robô");
-        MsgBox.exec();
-    }
 }
 
 double* MainWindow::Calc_Reacoes_Apoio(double P, double L, double cg, double e1)

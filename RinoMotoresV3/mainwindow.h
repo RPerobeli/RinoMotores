@@ -24,7 +24,7 @@ public:
 
     void Limpa_CondicoesDeContorno();
 
-    void Calc_Dados_Auxiliares();
+    void Calc_Dados_Auxiliares(double Massa, double Comprimento, double CentroDeGravidade, double Gravidade, double CoefAtrito_estatico, int indice_QtdMotores,double E1,double E2);
 
     double* Calc_Reacoes_Apoio(double P, double L, double cg, double e1);
 
