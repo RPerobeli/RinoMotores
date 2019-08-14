@@ -42,7 +42,7 @@ color:#c73232;</string>
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>129</x>
@@ -95,7 +95,7 @@ color:#c73232;</string>
     <item>
      <widget class="QLabel" name="label_Kv">
       <property name="text">
-       <string>Kv ()</string>
+       <string>Kv (V/rpm)</string>
       </property>
      </widget>
     </item>
@@ -115,7 +115,7 @@ color:#fff;</string>
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>12</x>
@@ -168,7 +168,7 @@ color:#fff;</string>
     <item>
      <widget class="QLabel" name="label_Kt">
       <property name="text">
-       <string>Kt ())</string>
+       <string>Kt (kg.mm/A)</string>
       </property>
      </widget>
     </item>

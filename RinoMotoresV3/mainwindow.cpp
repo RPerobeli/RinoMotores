@@ -117,17 +117,24 @@ void MainWindow::on_Btn_Calcular_clicked()
             switch(indiceAplicacao)
             {
                 case 1:
+                {
                     qDebug()<<"Mini-sumô";
-                    Matrix2d Result = Resultado_Final_Minisumo(Massa,Raio,ForcaResistente,indice_QtdMotores);
-                    break;
+                    Matrix2d Result = Resultado_Final_Minisumo(Massa,Raio,ForcaResistente,indice_QtdMotores,Gravidade);
+                }break;
                 case 2:
+                {
                     qDebug()<<"Seguidor";
-                    break;
+                }break;
                 case 3:
+                {
                     qDebug()<<"VSSS";
-                    break;
+                }break;
                 case 4:
+                {
                     qDebug()<<"Outros";
+                }break;
+                default:
+                    qDebug()<<"erro no switch case";
                     break;
             }
         }
