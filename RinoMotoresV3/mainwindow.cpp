@@ -8,6 +8,7 @@
 #include <QtSql>
 #include <QDebug>
 #include <QFileInfo>
+#include <libcalculus.h>
 
 //Salva o banco de dados em uma variável
 static QSqlDatabase DbMotores = QSqlDatabase::addDatabase("QSQLITE");
@@ -94,7 +95,25 @@ void MainWindow::on_Btn_Calcular_clicked()
     {
         //Uma vez que a aplicação é válida, calcular os dados auxiliares
         Calc_Dados_Auxiliares();
+        //confere qual a aplicação, e resolve o sistema de EDOs
+        switch(indiceAplicacao)
+        {
+            case 1:
+                qDebug()<<"Mini-sumô";
+
+                break;
+            case 2:
+                qDebug()<<"Seguidor";
+                break;
+            case 3:
+                qDebug()<<"VSSS";
+                break;
+            case 4:
+                qDebug()<<"Outros";
+                break;
+        }
     }
+
 }
 
 void MainWindow::on_Btn_DadosRobo_clicked()
