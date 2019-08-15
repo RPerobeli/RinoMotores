@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "motoreswindow.h"
 #include "results.h"
@@ -113,13 +113,18 @@ void MainWindow::on_Btn_Calcular_clicked()
             //Uma vez que a aplicação é válida, calcular os dados auxiliares
             Calc_Dados_Auxiliares(Massa,Comprimento,CentroDeGravidade,Gravidade,CoefAtrito_estatico,indice_QtdMotores,E1,E2);
 
+            //obtém a quantidade de motores no banco de dados
+            int QtdMotores = MainWindow::Verifica_Qtd_Motores();
+            QString QtdMotores_str = QString::number(QtdMotores);
+            qDebug()<<"quantidade de motores no banco:"+QtdMotores_str;
+
             //confere qual a aplicação, e resolve o sistema de EDOs
             switch(indiceAplicacao)
             {
                 case 1:
                 {
                     qDebug()<<"Mini-sumô";
-                    Matrix2d Result = Resultado_Final_Minisumo(Massa,Raio,ForcaResistente,indice_QtdMotores,Gravidade);
+                    MatrixXd Result = Resultado_Final_Minisumo(Massa,Raio,ForcaResistente,indice_QtdMotores,Gravidade,QtdMotores);
                 }break;
                 case 2:
                 {
@@ -207,7 +212,7 @@ void MainWindow::Calc_Dados_Auxiliares(double Massa, double Comprimento, double 
 {
     //Função que calcula reações de apoio, forças de atrito, ... COLOCAR MAIS SE TIVE
         //Calcula reações de apoio:
-        double Peso = (Massa*Gravidade)/1000;
+        double Peso = (Massa*Gravidade)/1000; //g --> kg
         double *reacoes = new double[2];
 
         if(indice_QtdMotores == 1 || indice_QtdMotores == 2)
@@ -244,4 +249,23 @@ double* MainWindow::Calc_Reacoes_Apoio(double P, double L, double cg, double e1)
     //Reacao no eixo dianteiro(caso tenha) ou na lamina
     r[1] = (P/L)*(cg-e1);
     return r;
+}
+
+int MainWindow::Verifica_Qtd_Motores()
+{
+
+    QSqlQuery query;
+    query.prepare("select * from tb_CondicoesContorno");
+    int n=0;
+    if(query.exec())
+    {
+        while(query.next())
+        {
+            n++;
+        }
+        return n;
+    }else
+    {
+        return -1;
+    }
 }

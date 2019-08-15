@@ -38,15 +38,15 @@ void Edit_Motor::on_BtnOK_clicked()
     QSqlQuery query;
     query.prepare("update tb_Motores "
                   "set Fabricante= '"+fab_str+"', "
+                  "Reducao= '"+GearRatio_str+"', "
+                  "Kt= '"+K_t_str+"', "
+                  "Kv= '"+K_v_str+"', "
                   "Tensão= '"+tensao_str+"', "
                   "CorrenteMax= '"+Imax_str+"', "
                   "CorrenteMin= '"+Imin_str+"', "
                   "RotaçãoMax= '"+Rot_max_str+"', "
                   "TorqueMax= '"+T_max_str+"', "
-                  "Preço= '"+Preco_str+"', "
-                  "Reducao= '"+GearRatio_str+"', "
-                  "Kt= '"+K_t_str+"', "
-                  "Kv= '"+K_v_str+"', where id ='"+id_str+"' ");
+                  "Preço= '"+Preco_str+"' where id ='"+id_str+"' ");
     if(query.exec())
      {
         //tab.Preenche_Tabela();
@@ -67,12 +67,16 @@ void Edit_Motor::on_Edit_id_editingFinished()
     {
         query.first();
         ui->Edit_Fabricante->setText(query.value(1).toString());
-        ui->Edit_Tensao->setText(query.value(2).toString());
-        ui->Edit_CurrMax->setText(query.value(3).toString());
-        ui->Edit_CurrMin->setText(query.value(4).toString());
-        ui->Edit_Rot->setText(query.value(5).toString());
-        ui->Edit_Torque->setText(query.value(6).toString());
-        ui->Edit_Preco->setText(query.value(7).toString());
+        ui->Edit_Reducao->setText(query.value(2).toString());
+        ui->Edit_Kt->setText(query.value(3).toString());
+        ui->Edit_Kv->setText(query.value(4).toString());
+        ui->Edit_Tensao->setText(query.value(5).toString());
+        ui->Edit_CurrMax->setText(query.value(6).toString());
+        ui->Edit_CurrMin->setText(query.value(7).toString());
+        ui->Edit_Rot->setText(query.value(8).toString());
+        ui->Edit_Torque->setText(query.value(9).toString());
+        ui->Edit_Preco->setText(query.value(10).toString());
+
         ui->Edit_Fabricante->setFocus();
 
     }

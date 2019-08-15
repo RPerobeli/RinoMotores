@@ -28,6 +28,8 @@ public:
 
     double* Calc_Reacoes_Apoio(double P, double L, double cg, double e1);
 
+    int Verifica_Qtd_Motores();
+
 private slots:
     void on_Btn_Motores_clicked();
 
