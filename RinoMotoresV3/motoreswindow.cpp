@@ -63,7 +63,7 @@ MotoresWindow::MotoresWindow(QWidget *parent) :
 void MotoresWindow::Propriedades_Tabela()
 {
     //Insere na tabela os titulos das colunas e define um tamanho menor para a coluna de ID
-    QStringList cabecalho = {"ID","Fabricante","Redução","Kt()","Kv(V/rpm)","Tensão(v)","Corrente Máx(A)","Corrente Mín(A)","Rotação Máx(rpm)","Torque Máx(kgf.mm)","Preço(R$)"};
+    QStringList cabecalho = {"ID","Fabricante","Redução","Kt(Kg.mm/A)","Kv(V/rpm)","Tensão(v)","Corrente Máx(A)","Corrente Mín(A)","Rotação Máx(rpm)","Torque Máx(kgf.mm)","Preço(R$)"};
     ui->tableWidget->setHorizontalHeaderLabels(cabecalho);
     ui->tableWidget->setColumnWidth(0,30);
 

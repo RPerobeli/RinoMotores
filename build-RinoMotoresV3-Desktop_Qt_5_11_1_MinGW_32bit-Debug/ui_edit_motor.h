@@ -29,7 +29,7 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_id;
     QLineEdit *Edit_id;
-    QWidget *widget;
+    QWidget *layoutWidget1;
     QHBoxLayout *horizontalLayout;
     QVBoxLayout *verticalLayout_2;
     QLabel *label_Fabricante;
@@ -88,65 +88,65 @@ public:
 
         horizontalLayout_2->addWidget(Edit_id);
 
-        widget = new QWidget(Edit_Motor);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(10, 100, 246, 299));
-        horizontalLayout = new QHBoxLayout(widget);
+        layoutWidget1 = new QWidget(Edit_Motor);
+        layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(10, 100, 246, 299));
+        horizontalLayout = new QHBoxLayout(layoutWidget1);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        label_Fabricante = new QLabel(widget);
+        label_Fabricante = new QLabel(layoutWidget1);
         label_Fabricante->setObjectName(QStringLiteral("label_Fabricante"));
 
         verticalLayout_2->addWidget(label_Fabricante);
 
-        Edit_Fabricante = new QLineEdit(widget);
+        Edit_Fabricante = new QLineEdit(layoutWidget1);
         Edit_Fabricante->setObjectName(QStringLiteral("Edit_Fabricante"));
 
         verticalLayout_2->addWidget(Edit_Fabricante);
 
-        label_CurrMax = new QLabel(widget);
+        label_CurrMax = new QLabel(layoutWidget1);
         label_CurrMax->setObjectName(QStringLiteral("label_CurrMax"));
 
         verticalLayout_2->addWidget(label_CurrMax);
 
-        Edit_CurrMax = new QLineEdit(widget);
+        Edit_CurrMax = new QLineEdit(layoutWidget1);
         Edit_CurrMax->setObjectName(QStringLiteral("Edit_CurrMax"));
 
         verticalLayout_2->addWidget(Edit_CurrMax);
 
-        label_rot = new QLabel(widget);
+        label_rot = new QLabel(layoutWidget1);
         label_rot->setObjectName(QStringLiteral("label_rot"));
 
         verticalLayout_2->addWidget(label_rot);
 
-        Edit_Rot = new QLineEdit(widget);
+        Edit_Rot = new QLineEdit(layoutWidget1);
         Edit_Rot->setObjectName(QStringLiteral("Edit_Rot"));
 
         verticalLayout_2->addWidget(Edit_Rot);
 
-        label_preco = new QLabel(widget);
+        label_preco = new QLabel(layoutWidget1);
         label_preco->setObjectName(QStringLiteral("label_preco"));
 
         verticalLayout_2->addWidget(label_preco);
 
-        Edit_Preco = new QLineEdit(widget);
+        Edit_Preco = new QLineEdit(layoutWidget1);
         Edit_Preco->setObjectName(QStringLiteral("Edit_Preco"));
 
         verticalLayout_2->addWidget(Edit_Preco);
 
-        label_Kt = new QLabel(widget);
+        label_Kt = new QLabel(layoutWidget1);
         label_Kt->setObjectName(QStringLiteral("label_Kt"));
 
         verticalLayout_2->addWidget(label_Kt);
 
-        Edit_Kt = new QLineEdit(widget);
+        Edit_Kt = new QLineEdit(layoutWidget1);
         Edit_Kt->setObjectName(QStringLiteral("Edit_Kt"));
 
         verticalLayout_2->addWidget(Edit_Kt);
 
-        Btn_Limpar = new QPushButton(widget);
+        Btn_Limpar = new QPushButton(layoutWidget1);
         Btn_Limpar->setObjectName(QStringLiteral("Btn_Limpar"));
         Btn_Limpar->setStyleSheet(QLatin1String("background-color:#c73232;\n"
 "color:#fff;"));
@@ -158,57 +158,57 @@ public:
 
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        label_Tensao = new QLabel(widget);
+        label_Tensao = new QLabel(layoutWidget1);
         label_Tensao->setObjectName(QStringLiteral("label_Tensao"));
 
         verticalLayout->addWidget(label_Tensao);
 
-        Edit_Tensao = new QLineEdit(widget);
+        Edit_Tensao = new QLineEdit(layoutWidget1);
         Edit_Tensao->setObjectName(QStringLiteral("Edit_Tensao"));
 
         verticalLayout->addWidget(Edit_Tensao);
 
-        label_CurrMin = new QLabel(widget);
+        label_CurrMin = new QLabel(layoutWidget1);
         label_CurrMin->setObjectName(QStringLiteral("label_CurrMin"));
 
         verticalLayout->addWidget(label_CurrMin);
 
-        Edit_CurrMin = new QLineEdit(widget);
+        Edit_CurrMin = new QLineEdit(layoutWidget1);
         Edit_CurrMin->setObjectName(QStringLiteral("Edit_CurrMin"));
 
         verticalLayout->addWidget(Edit_CurrMin);
 
-        label_Torq = new QLabel(widget);
+        label_Torq = new QLabel(layoutWidget1);
         label_Torq->setObjectName(QStringLiteral("label_Torq"));
 
         verticalLayout->addWidget(label_Torq);
 
-        Edit_Torque = new QLineEdit(widget);
+        Edit_Torque = new QLineEdit(layoutWidget1);
         Edit_Torque->setObjectName(QStringLiteral("Edit_Torque"));
 
         verticalLayout->addWidget(Edit_Torque);
 
-        label_reducao = new QLabel(widget);
+        label_reducao = new QLabel(layoutWidget1);
         label_reducao->setObjectName(QStringLiteral("label_reducao"));
 
         verticalLayout->addWidget(label_reducao);
 
-        Edit_Reducao = new QLineEdit(widget);
+        Edit_Reducao = new QLineEdit(layoutWidget1);
         Edit_Reducao->setObjectName(QStringLiteral("Edit_Reducao"));
 
         verticalLayout->addWidget(Edit_Reducao);
 
-        label_Kv = new QLabel(widget);
+        label_Kv = new QLabel(layoutWidget1);
         label_Kv->setObjectName(QStringLiteral("label_Kv"));
 
         verticalLayout->addWidget(label_Kv);
 
-        Edit_Kv = new QLineEdit(widget);
+        Edit_Kv = new QLineEdit(layoutWidget1);
         Edit_Kv->setObjectName(QStringLiteral("Edit_Kv"));
 
         verticalLayout->addWidget(Edit_Kv);
 
-        BtnOK = new QPushButton(widget);
+        BtnOK = new QPushButton(layoutWidget1);
         BtnOK->setObjectName(QStringLiteral("BtnOK"));
         BtnOK->setStyleSheet(QLatin1String("background-color:#c73232;\n"
 "color:#fff;"));
@@ -233,7 +233,7 @@ public:
         label_CurrMax->setText(QApplication::translate("Edit_Motor", "Corrente M\303\241x(A)", nullptr));
         label_rot->setText(QApplication::translate("Edit_Motor", "Rota\303\247\303\243o M\303\241x(rpm)", nullptr));
         label_preco->setText(QApplication::translate("Edit_Motor", "Pre\303\247o(R$)", nullptr));
-        label_Kt->setText(QApplication::translate("Edit_Motor", "Kt ()", nullptr));
+        label_Kt->setText(QApplication::translate("Edit_Motor", "Kt (kg.mm/A)", nullptr));
         Edit_Kt->setText(QString());
         Btn_Limpar->setText(QApplication::translate("Edit_Motor", "Limpar", nullptr));
         label_Tensao->setText(QApplication::translate("Edit_Motor", "Tens\303\243o(V)", nullptr));
@@ -241,7 +241,7 @@ public:
         label_Torq->setText(QApplication::translate("Edit_Motor", "Torque M\303\241x (kgf.mm)", nullptr));
         label_reducao->setText(QApplication::translate("Edit_Motor", "Reducao", nullptr));
         Edit_Reducao->setText(QString());
-        label_Kv->setText(QApplication::translate("Edit_Motor", "Kv ()", nullptr));
+        label_Kv->setText(QApplication::translate("Edit_Motor", "Kv (V/rpm)", nullptr));
         Edit_Kv->setText(QString());
         BtnOK->setText(QApplication::translate("Edit_Motor", "Ok", nullptr));
     } // retranslateUi

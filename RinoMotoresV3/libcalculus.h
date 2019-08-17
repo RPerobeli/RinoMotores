@@ -19,7 +19,7 @@ using namespace std;
 #define h 0.001
 #define raioDojo 0.77/2
 #define pi 3.141589
-#define erro 0.001 //erro permitido pelo metodo rungekutta
+#define erro 0.00001 //erro permitido pelo metodo rungekutta
 
 
 //função calcula módulo
@@ -81,6 +81,7 @@ int Verifica_Num_Motores(int indice_QtdMotores)
 
 Vector3d Array_Final(MatrixXd resultados)
 {
+    cout <<"Entrou no ArrayFinal"<<endl;
     int i = resultados.cols();
     //QString i_str = QString::number(i);
     //qDebug()<<"numero de colunas:"+i_str;
@@ -88,12 +89,13 @@ Vector3d Array_Final(MatrixXd resultados)
     Vector3d X_final;   X_final << resultados(3,i-1), //tempo
                                    resultados(0,i-1), //corrente elétrica
                                    resultados(1,i-1); //velocidade linear
+    cout << "X_final\n" << X_final <<endl;
     return X_final;
 }
 
 MatrixXd RungeKutta4_limitado(Vector3d X_0, double F_res, double V, double Kt, double Kv, double GearRatio, double m,double r)
 {
-    qDebug()<<"Entrou no RK4 limitado";
+    //qDebug()<<"Entrou no RK4 limitado";
     Vector3d X(3);
     X << X_0(0),X_0(1),X_0(2);
 
@@ -107,14 +109,14 @@ MatrixXd RungeKutta4_limitado(Vector3d X_0, double F_res, double V, double Kt, d
     QString reducao = QString::number(GearRatio,'g',6);
     QString massa = QString::number(m,'g',6);
     QString raio = QString::number(r,'g',6);
-    qDebug()<<"F= "+Fres+" V= "+tensao+" Kt= "+Kt_str+" Kv= "+Kv_str;
+    //qDebug()<<"F= "+Fres+" V= "+tensao+" Kt= "+Kt_str+" Kv= "+Kv_str;
 
     MatrixXd MatrizResultados(4,10000); //4,10000
 
     while((X(2)>-raioDojo) && (X(2)<raioDojo)) //posição dentro do dohyo
     {
 
-        cout<<"while do RK4 - iteração "<< cont;
+        //cout<<"while do RK4 - iteracao "<< cont<<endl;
 
         //armazenamento das variáveis
         MatrizResultados(0,cont) = X(0);//corrente
@@ -135,8 +137,8 @@ MatrixXd RungeKutta4_limitado(Vector3d X_0, double F_res, double V, double Kt, d
         Vector3d X_n = X + (h/6)*(F1+ 2*F2 + 2*F3 + F4);
         //Vector3d X_n = X+h*F1;
 
-        cout << X <<endl;
-        cout <<"--------------------"<<endl;
+        //cout << X <<endl;
+        //cout <<"--------------------"<<endl;
 
         t = t+h;
         X = X_n;
@@ -149,9 +151,9 @@ MatrixXd RungeKutta4_limitado(Vector3d X_0, double F_res, double V, double Kt, d
 MatrixXd RungeKutta4_Convergente(Vector3d X_0,double F_res, double V, double Kt, double Kv, double GearRatio, double m,double r)
 {
     //O critério de parada do while é a diferença entre a velocidade atual e a anterior
-    qDebug()<<"Entrou no RK4 CONVERGENTE";
-    Vector3d X(2);
-    X << X_0(0),X_0(1);
+    //qDebug()<<"Entrou no RK4 CONVERGENTE";
+    Vector3d X(3);
+    X << X_0(0),X_0(1),X(2);
 
     double t = 0;
     int cont = 0;
@@ -164,21 +166,23 @@ MatrixXd RungeKutta4_Convergente(Vector3d X_0,double F_res, double V, double Kt,
     QString reducao = QString::number(GearRatio,'g',6);
     QString massa = QString::number(m,'g',6);
     QString raio = QString::number(r,'g',6);
-    qDebug()<<"F= "+Fres+" V= "+tensao+" Kt= "+Kt_str+" Kv= "+Kv_str;
+    //qDebug()<<"F= "+Fres+" V= "+tensao+" Kt= "+Kt_str+" Kv= "+Kv_str;
 
-    MatrixXd MatrizResultados(3,10000); //4,10000
+    MatrixXd MatrizResultados(4,10000); //4,10000
 
-    while((X(1)-v_ant) > erro)
+    while((X(1)-v_ant) > erro || cont < 5)
     {
 
-        cout<<"while do RK4 - iteração "<< cont;
+        //cout<<"while do RK4 - iteracao "<< cont << endl;
 
         v_ant = X(1); //atualiza a velocidade anterior
+
 
         //armazenamento das variáveis
         MatrizResultados(0,cont) = X(0);//corrente
         MatrizResultados(1,cont) = X(1);//velocidade
-        MatrizResultados(2,cont) = t;   //tempo
+        MatrizResultados(2,cont) = X(2);//posicao
+        MatrizResultados(3,cont) = t;   //tempo
 
         //equações do sistema
         double eq1 = V/l -((R/l)*X(0))-(((Kv*GearRatio)/(l*r))*X(1));
@@ -243,6 +247,7 @@ MatrixXd Resultado_Final_Minisumo(double Massa,double Raio, double ForcaResisten
             //Teste de Arrancada
             MatrixXd resultadosArrancada = RungeKutta4_Convergente(X_0,0, Tensao, Kt, Kv, Reducao, Massa, Raio);
             Vector3d finalArrancada = Array_Final(resultadosArrancada);
+            cout << "final arrancada\n "<<finalArrancada<<endl;
             notasTestes(1,cont) = finalArrancada(0); //tempo
 
             QString tempoArr = QString::number(notasTestes(1,cont),'g',6);
@@ -261,7 +266,7 @@ MatrixXd Resultado_Final_Minisumo(double Massa,double Raio, double ForcaResisten
 
 
             QString tempoRev = QString::number(notasTestes(2,cont),'g',6);
-            //qDebug()<<"tempoRev "+tempoRev;*/
+            qDebug()<<"tempoRev "+tempoRev;
 
             //Teste do Empurrão
             ForcaResistente = ForcaResistente/numMotores;
@@ -273,7 +278,7 @@ MatrixXd Resultado_Final_Minisumo(double Massa,double Raio, double ForcaResisten
             notasTestes(3,cont) = finalEmpurrao(0);
 
             QString tempoEmp = QString::number(notasTestes(3,cont),'g',6);
-            //qDebug()<<"tempoEmp "+tempoEmp;
+            qDebug()<<"tempoEmp "+tempoEmp;
 
             //Eficiência no ponto de operação
             double i_final = finalEmpurrao(1);
@@ -286,7 +291,7 @@ MatrixXd Resultado_Final_Minisumo(double Massa,double Raio, double ForcaResisten
             notasTestes(4,cont) = eficiencia;
 
             QString eff = QString::number(notasTestes(4,cont),'g',6);
-            //qDebug()<<"eficiencia "+eff;
+            qDebug()<<"eficiencia "+eff;
 
             notasTestes(5,cont) = Preco;
             notasTestes(6,cont) = v_max;
