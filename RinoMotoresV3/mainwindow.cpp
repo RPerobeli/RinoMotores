@@ -91,7 +91,7 @@ void MainWindow::on_Btn_Calcular_clicked()
         QMessageBox MsgBox;
         MsgBox.setText("Selecione a aplicação do robô");
         MsgBox.exec();
-    }else
+    }else if(ui->comboBox->currentIndex() != 0)
     {
         QSqlQuery query;
         query.prepare("select * from tb_CondicoesContorno where excluir = 'true'");
@@ -115,8 +115,9 @@ void MainWindow::on_Btn_Calcular_clicked()
 
             //obtém a quantidade de motores no banco de dados
             int QtdMotores = MainWindow::Verifica_Qtd_Motores();
+            int indicePesos = ui->comboBox->currentIndex();
             QString QtdMotores_str = QString::number(QtdMotores);
-            qDebug()<<"quantidade de motores no banco:"+QtdMotores_str;
+            qDebug()<<"quantidade de motores no banco: "+QtdMotores_str;
 
             //confere qual a aplicação, e resolve o sistema de EDOs
             switch(indiceAplicacao)
@@ -124,7 +125,7 @@ void MainWindow::on_Btn_Calcular_clicked()
                 case 1:
                 {
                     qDebug()<<"Mini-sumô";
-                    MatrixXd Result = Resultado_Final_Minisumo(Massa,Raio,ForcaResistente,indice_QtdMotores,Gravidade,QtdMotores);
+                    MatrixXd Result = Resultado_Final_Minisumo(Massa,Raio,ForcaResistente,indice_QtdMotores,Gravidade,QtdMotores,indicePesos);
                 }break;
                 case 2:
                 {
@@ -142,15 +143,17 @@ void MainWindow::on_Btn_Calcular_clicked()
                     qDebug()<<"erro no switch case";
                     break;
             }
-        }
-        else
+        }else
         {
         QMessageBox MsgBox;
         MsgBox.setText("Erro ao adquirir os dados do robô");
         MsgBox.exec();
         }
-
-
+    }else
+    {
+        QMessageBox MsgBox;
+        MsgBox.setText("Selecione um foco para o motor");
+        MsgBox.exec();
     }
 
 }
@@ -255,7 +258,7 @@ int MainWindow::Verifica_Qtd_Motores()
 {
 
     QSqlQuery query;
-    query.prepare("select * from tb_CondicoesContorno");
+    query.prepare("select * from tb_Motores");
     int n=0;
     if(query.exec())
     {
