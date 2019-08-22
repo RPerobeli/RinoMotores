@@ -34,13 +34,14 @@ MatrixXd Ponderacao(int indice,MatrixXd notasModuladas,MatrixXd notasTestes)
     //cout <<"Pesos:\n"<<PesosMinisumo<<endl;
 
     MatrixXd notasPesadas(2,notasModuladas.cols());
+    notasPesadas = MatrixXd::Zero(2,notasModuladas.cols());
 
     for(int i=0;i<notasPesadas.cols();i++)
     {
         notasPesadas(0,i) = notasTestes(0,i);
-        for(int j=0;j<notasModuladas.cols();j++)
+        for(int j=0;j<notasModuladas.rows();j++)
         {
-            notasPesadas(1,i) = PesosMinisumo(indice,j)*notasModuladas(j,i);
+            notasPesadas(1,i) = notasPesadas(1,i)+ PesosMinisumo(indice-1,j)*notasModuladas(j,i);
         }
     }
     return notasPesadas;
@@ -101,26 +102,31 @@ void Ordena_Matriz(MatrixXd *matrix)
     }
     return;
 }
-
-void Adequa_Unidades_SI(double *Torque_max,double *Kv,double *Rot_max, double *Massa, double *Raio, double *Kt, double g)
+void Adequa_Unidades_Robo_SI(double *Massa,double *Raio)
+{
+    *Massa = *Massa/1000; //g --> kg
+    *Raio = *Raio/1000; //mm --> m
+/*
+    QString massa_str = QString::number(*Massa,'g',6);
+    QString Raio_str = QString::number(*Raio,'g',6);
+    qDebug()<<"Massa= "+massa_str+"kg  Raio= "+Raio_str+"m";
+*/
+}
+void Adequa_Unidades_SI(double *Torque_max,double *Kv,double *Rot_max, double *Kt, double g)
 {
     //qDebug()<<"Adequou as unidades";
     //recebe endereço de memoria, o *Variável é o valor da variável
     *Torque_max = *Torque_max*g/1000; //kg.mm --> N.m
     *Kv = *Kv*30/pi; // V/rpm --> V.s/rad
     *Rot_max = *Rot_max *pi/30; // rpm --> rad/s
-    *Massa = *Massa/1000; //g --> kg
-    *Raio = *Raio/1000; //mm --> m
     *Kt = *Kt*g/1000; // kg.mm/A --> N.m/A
 
     /*QString T_max = QString::number(*Torque_max,'g',6);
     QString Kv_str = QString::number(*Kv,'g',6);
     QString Rot_max_str = QString::number(*Rot_max,'g',6);
-    QString massa_str = QString::number(*Massa,'g',6);
-    QString Raio_str = QString::number(*Raio,'g',6);
     //QString Kt_str = QString::number(*Kt,'g',6);
 
-    qDebug()<< "T_max= "+T_max+"Nm  Kv="+Kv_str+"Vs/rad  Rot_max="+Rot_max_str+"rad/s  Massa= "+massa_str+"kg  Raio= "+Raio_str+"m  Kt= "+Kt_str+"";
+    qDebug()<< "T_max= "+T_max+"Nm  Kv="+Kv_str+"Vs/rad  Rot_max="+Rot_max_str+"rad/s  Kt= "+Kt_str+"";
     */
 
     return;
@@ -218,7 +224,11 @@ Vector4d RungeKutta4_limitado(Vector3d X_0, double F_res, double V, double Kt, d
         cont++;
 
     }
-    cout <<"result"<<Result<<endl;
+    if(Result(2)<0)
+    {
+        Result(3)=30;
+    }
+    //cout <<"result"<<Result<<endl;
     return Result;
 }
 
@@ -306,12 +316,12 @@ MatrixXd Resultado_Final_Minisumo(double Massa,double Raio, double ForcaResisten
                                     //5- preco
                                     //6- velocidade maxima
         MatrixXd notasModuladas(6,QtdMotores);
-
+        Adequa_Unidades_Robo_SI(&Massa,&Raio);
 
         while(query.next())//enquanto houver um motor
         {
             Vector3d X_0; X_0 << 0,0,0;
-            cout<<"Entrou no while dos motores"<<endl;
+            //cout<<"Entrou no while dos motores"<<endl;
 
 
             //adquire as variáveis
@@ -328,7 +338,7 @@ MatrixXd Resultado_Final_Minisumo(double Massa,double Raio, double ForcaResisten
             double Preco = query.value(10).toDouble();
 
 
-            Adequa_Unidades_SI(&Torque_max,&Kv,&Rot_max,&Massa,&Raio,&Kt,Gravidade);
+            Adequa_Unidades_SI(&Torque_max,&Kv,&Rot_max,&Kt,Gravidade);
 
             //double v_max = Rot_max*Raio; // em m/s
 
@@ -377,29 +387,27 @@ MatrixXd Resultado_Final_Minisumo(double Massa,double Raio, double ForcaResisten
 
             //Eficiência no ponto de operação
             double i_final = finalEmpurrao(0);
-            cout <<"i_final\n"<<i_final <<endl;
+            //cout <<"i_final\n"<<i_final <<endl;
             double w_final = finalEmpurrao(1)/Raio;
-            cout <<"w_final\n"<<w_final <<endl;
+            //cout <<"w_final\n"<<w_final <<endl;
             double torque = Absolute(Kt*i_final - ForcaResistente*Raio);
             double potenciaMecanica = torque*w_final;
             //cout <<"potenciaMecanica\n"<<potenciaMecanica <<endl;
             double potenciaEletrica = R*(pow(i_final,2));
             //cout <<"potenciaEletrica\n"<<potenciaEletrica <<endl;
-            cout <<"---------------------------------"<<endl;
+            //cout <<"---------------------------------"<<endl;
 
             double eficiencia = (potenciaMecanica/potenciaEletrica)*100;
             notasTestes(4,cont) = eficiencia;
             vetorDeMaximos(3)= Maior(eficiencia,vetorDeMaximos(3));
-
-            //QString eff = QString::number(notasTestes(4),'g',6);
-            //qDebug()<<"eficiencia "+eff;
+            //cout <<"eficiencia:\n"<<eficiencia <<endl;
 
             notasTestes(5,cont) = Preco;
             notasTestes(6,cont) = (finalArrancada(1)/Raio)*30/pi; //vel linear ---> rotacao em rpm
 
             vetorDeMaximos(4)= Maior(Preco,vetorDeMaximos(4));
 
-            vetorDeMaximos(5)= Maior(finalArrancada(1)/Raio,vetorDeMaximos(5));
+            vetorDeMaximos(5)= Maior(notasTestes(6,cont),vetorDeMaximos(5));
             //cout <<"vetor de maximos\n"<<vetorDeMaximos <<endl;
 
             cont++;
@@ -411,7 +419,7 @@ MatrixXd Resultado_Final_Minisumo(double Massa,double Raio, double ForcaResisten
 
         //faz ponderação
         notasFinais = Ponderacao(indicePesos, notasModuladas, notasTestes);
-        //cout << "matriz de notas finais:\n" << notasFinais << endl;
+        cout << "matriz de notas finais:\n" << notasFinais << endl;
 
         //faz ordenação do vetor de notas finais depois de ter adquirido todos os motores
         Ordena_Matriz(&notasFinais);
