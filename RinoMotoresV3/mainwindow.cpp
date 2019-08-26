@@ -84,6 +84,8 @@ void MainWindow::on_Btn_Instrucoes_clicked()
 
 void MainWindow::on_Btn_Calcular_clicked()
 {
+    MatrixXd Result;
+    MatrixXd* Pointer_Result = &Result;
     //É necessário saber qual a aplicação do robô antes de calcular qualquer coisa
     int indiceAplicacao = ui->comboBox_Aplicacao->currentIndex();
     if(indiceAplicacao == 0)
@@ -125,24 +127,35 @@ void MainWindow::on_Btn_Calcular_clicked()
                 case 1:
                 {
                     qDebug()<<"Mini-sumô";
-                    MatrixXd Result = Resultado_Final_Minisumo(Massa,Raio,ForcaResistente,indice_QtdMotores,Gravidade,QtdMotores,indicePesos);
+                    Result = Resultado_Final_Minisumo(Massa,Raio,ForcaResistente,indice_QtdMotores,Gravidade,QtdMotores,indicePesos);
+
+
                 }break;
                 case 2:
                 {
                     qDebug()<<"Seguidor";
+                    //MatrixXd Result = Resultado_Final_Seguidor();
                 }break;
                 case 3:
                 {
                     qDebug()<<"VSSS";
+                    //MatrixXd Result = Resultado_Final_VSSS();
                 }break;
                 case 4:
                 {
                     qDebug()<<"Outros";
+                    //MatrixXd Result = Resultado_Final_Outro();
                 }break;
                 default:
                     qDebug()<<"erro no switch case";
                     break;
             }
+            //Salva a matriz de notas finais em uma Tabela do banco de dados
+
+
+            //Abre a Janela de Resultados
+            Results Result_Window(this, Pointer_Result);
+            Result_Window.exec();
         }else
         {
         QMessageBox MsgBox;

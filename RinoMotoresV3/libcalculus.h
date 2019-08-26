@@ -92,15 +92,28 @@ MatrixXd Modula_Notas(VectorXd vetorDeMaximos, MatrixXd notasTestes)
     return notasModuladas;
 }
 
-void Ordena_Matriz(MatrixXd *matrix)
+MatrixXd Ordena_Matriz(MatrixXd matrix)
 {
     //cout <<"matrix:\n"<< *matrix <<endl;
     Vector2d aux; aux<<0,0;
-    for(int i = 0;i<matrix->cols();i++)
+    for(int i = 0;i<matrix.cols();i++)
     {
+        for(int j=i+1; j<matrix.cols();j++)
+        {
+            if(matrix(1,i)<matrix(1,j))
+            {
+                aux(0) = matrix(0,i);
+                aux(1) = matrix(1,i);
 
+                matrix(0,i) = matrix(0,j);
+                matrix(1,i) = matrix(1,j);
+
+                matrix(0,j) = aux(0);
+                matrix(1,j) = aux(1);
+            }
+        }
     }
-    return;
+    return matrix;
 }
 void Adequa_Unidades_Robo_SI(double *Massa,double *Raio)
 {
@@ -419,10 +432,11 @@ MatrixXd Resultado_Final_Minisumo(double Massa,double Raio, double ForcaResisten
 
         //faz ponderação
         notasFinais = Ponderacao(indicePesos, notasModuladas, notasTestes);
-        cout << "matriz de notas finais:\n" << notasFinais << endl;
+        //cout << "matriz de notas finais:\n" << notasFinais << endl;
 
         //faz ordenação do vetor de notas finais depois de ter adquirido todos os motores
-        Ordena_Matriz(&notasFinais);
+        notasFinais = Ordena_Matriz(notasFinais);
+        //cout << "matriz de notas finais ORDENADAS:\n" << notasFinais << endl;
 
         //retorna a matriz de resultados, com ID e nota ordenados
         return notasFinais;

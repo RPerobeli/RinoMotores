@@ -12,20 +12,102 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QTableWidget>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_Results
 {
 public:
+    QWidget *layoutWidget;
+    QVBoxLayout *verticalLayout;
+    QLabel *label;
+    QTableWidget *tableWidget_Ranking;
+    QPushButton *Btn_Fechar;
+    QWidget *widget;
+    QHBoxLayout *horizontalLayout;
+    QPushButton *Btn_Expandir;
+    QPushButton *Btn_PlotPolar;
+    QPushButton *Btn_PlotLinear;
 
     void setupUi(QDialog *Results)
     {
         if (Results->objectName().isEmpty())
             Results->setObjectName(QStringLiteral("Results"));
-        Results->resize(568, 328);
+        Results->resize(508, 578);
         Results->setStyleSheet(QLatin1String("background-color:#fff\n"
 ""));
+        layoutWidget = new QWidget(Results);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(10, 30, 481, 491));
+        verticalLayout = new QVBoxLayout(layoutWidget);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        label = new QLabel(layoutWidget);
+        label->setObjectName(QStringLiteral("label"));
+        label->setEnabled(true);
+        QFont font;
+        font.setPointSize(16);
+        label->setFont(font);
+        label->setStyleSheet(QLatin1String("background-color:#c73232;\n"
+"color:#fff;"));
+        label->setAlignment(Qt::AlignCenter);
+
+        verticalLayout->addWidget(label);
+
+        tableWidget_Ranking = new QTableWidget(layoutWidget);
+        if (tableWidget_Ranking->columnCount() < 4)
+            tableWidget_Ranking->setColumnCount(4);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        tableWidget_Ranking->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        tableWidget_Ranking->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        tableWidget_Ranking->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+        tableWidget_Ranking->setHorizontalHeaderItem(3, __qtablewidgetitem3);
+        tableWidget_Ranking->setObjectName(QStringLiteral("tableWidget_Ranking"));
+
+        verticalLayout->addWidget(tableWidget_Ranking);
+
+        Btn_Fechar = new QPushButton(Results);
+        Btn_Fechar->setObjectName(QStringLiteral("Btn_Fechar"));
+        Btn_Fechar->setGeometry(QRect(410, 540, 80, 25));
+        Btn_Fechar->setStyleSheet(QLatin1String("background-color:#c73232;\n"
+"color:#fff;"));
+        widget = new QWidget(Results);
+        widget->setObjectName(QStringLiteral("widget"));
+        widget->setGeometry(QRect(10, 540, 283, 27));
+        horizontalLayout = new QHBoxLayout(widget);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        Btn_Expandir = new QPushButton(widget);
+        Btn_Expandir->setObjectName(QStringLiteral("Btn_Expandir"));
+        Btn_Expandir->setStyleSheet(QLatin1String("background-color:#c73232;\n"
+"color:#fff;"));
+
+        horizontalLayout->addWidget(Btn_Expandir);
+
+        Btn_PlotPolar = new QPushButton(widget);
+        Btn_PlotPolar->setObjectName(QStringLiteral("Btn_PlotPolar"));
+        Btn_PlotPolar->setStyleSheet(QLatin1String("background-color:#c73232;\n"
+"color:#fff;"));
+
+        horizontalLayout->addWidget(Btn_PlotPolar);
+
+        Btn_PlotLinear = new QPushButton(widget);
+        Btn_PlotLinear->setObjectName(QStringLiteral("Btn_PlotLinear"));
+        Btn_PlotLinear->setStyleSheet(QLatin1String("background-color:#c73232;\n"
+"color:#fff;"));
+
+        horizontalLayout->addWidget(Btn_PlotLinear);
+
 
         retranslateUi(Results);
 
@@ -35,6 +117,19 @@ public:
     void retranslateUi(QDialog *Results)
     {
         Results->setWindowTitle(QApplication::translate("Results", "Dialog", nullptr));
+        label->setText(QApplication::translate("Results", "Ranking de Motores", nullptr));
+        QTableWidgetItem *___qtablewidgetitem = tableWidget_Ranking->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QApplication::translate("Results", "ID", nullptr));
+        QTableWidgetItem *___qtablewidgetitem1 = tableWidget_Ranking->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QApplication::translate("Results", "Fabricante", nullptr));
+        QTableWidgetItem *___qtablewidgetitem2 = tableWidget_Ranking->horizontalHeaderItem(2);
+        ___qtablewidgetitem2->setText(QApplication::translate("Results", "Redu\303\247\303\243o", nullptr));
+        QTableWidgetItem *___qtablewidgetitem3 = tableWidget_Ranking->horizontalHeaderItem(3);
+        ___qtablewidgetitem3->setText(QApplication::translate("Results", "Nota Final", nullptr));
+        Btn_Fechar->setText(QApplication::translate("Results", "Fechar", nullptr));
+        Btn_Expandir->setText(QApplication::translate("Results", "Expandir Motor", nullptr));
+        Btn_PlotPolar->setText(QApplication::translate("Results", "Gr\303\241fico Polar", nullptr));
+        Btn_PlotLinear->setText(QApplication::translate("Results", "Simular Motor", nullptr));
     } // retranslateUi
 
 };
