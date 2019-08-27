@@ -76,8 +76,9 @@ void MainWindow::on_Btn_Instrucoes_clicked()
     QMessageBox MsgBox;
     MsgBox.setText("Instruções,\n"
                    "Bem vindo ao software de cálculo de motores da Rinobot Team.\nPara o uso correto do software:\n"
-                   "Use ponto como separador decimal ao preencher os dados do robô.\nSelecione o tipo de motor desejado dentre as opções.\nSe atente às unidades abordadas\nPreencha a base de dados dos motores"
+                   "Use ponto como separador decimal ao preencher os dados do robô.\nSelecione o foco de motor desejado dentre as opções.\nSe atente às unidades abordadas\nPreencha a base de dados dos motores"
                    " clicando no botão Motores.\nO cálculo do motor indicado será feito ao pressionar o botão Calcular.\n"
+                   "Ao informar a Redução do motor, caso o motor tenha redução X:1, informar apenas o valor X.\n"
                    "Para mais informações: Rodrigo.costa2015@engenharia.ufjf.br.\n");
     MsgBox.exec();
 }
@@ -209,7 +210,7 @@ void MainWindow::Limpa_CondicoesDeContorno()
 
     QString CoefAtrito_estatico= "0.6";
     QString Gravidade = "9.81";
-    QString ForcaResistente = "40";
+    QString ForcaResistente = "12";
     //Após limpar, ela insere 1 unico conjunto de dados padrao
     query.prepare("insert into tb_CondicoesContorno (Massa,Raio,Comprimento,CentroDeGravidade,Gravidade,CoefAtrito,ForcaResistente,Indice_QtdMotores,e1,e2,excluir)"
                   " values('',' ','','','"+Gravidade+"','"+CoefAtrito_estatico+"','"+ForcaResistente+"','0','','','true')");

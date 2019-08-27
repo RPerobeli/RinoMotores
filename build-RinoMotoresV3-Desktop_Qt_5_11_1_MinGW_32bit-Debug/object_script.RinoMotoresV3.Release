@@ -6,10 +6,12 @@ INPUT(
 ./release\results.o
 ./release\edit_motor.o
 ./release\dadosrobo.o
+./release\details.o
 ./release\moc_mainwindow.o
 ./release\moc_motoreswindow.o
 ./release\moc_add_motor.o
 ./release\moc_results.o
 ./release\moc_edit_motor.o
 ./release\moc_dadosrobo.o
+./release\moc_details.o
 );

@@ -1,5 +1,7 @@
 #include "results.h"
 #include "ui_results.h"
+#include "details.h"
+#include "ui_details.h"
 #include <../Eigen/Eigen/Dense>
 #include "mainwindow.h"
 #include <QtSql>
@@ -14,7 +16,7 @@ Results::Results(QWidget *parent, MatrixXd* Matriz) :
     ui(new Ui::Results)
 {
     ui->setupUi(this);
-
+    setWindowTitle("Resultado da Simulação");
     //preenche o table widget com a matriz resultante
     Preenche_Tabela_Resultados(*Matriz);
 
@@ -47,7 +49,7 @@ void Results::Preenche_Tabela_Resultados(MatrixXd m)
         QString Nota = QString::number(m(1,i),'g',6);
         QString ID = QString::number(m(0,i),'g',4);
         QSqlQuery query;
-        query.prepare("select * from tb_Motores where ID = '"+ID+"'");
+        query.prepare("select * from tb_Motores where id = '"+ID+"'");
         if(query.exec())
         {
             query.first();
@@ -57,5 +59,32 @@ void Results::Preenche_Tabela_Resultados(MatrixXd m)
             ui->tableWidget_Ranking->setItem(i,2,new QTableWidgetItem(query.value(2).toString()));
             ui->tableWidget_Ranking->setItem(i,3,new QTableWidgetItem(Nota));
         }
+    }
+}
+
+void Results::on_Btn_Detalhes_clicked()
+{
+    int Linha_Atual = ui->tableWidget_Ranking->currentRow();
+    QString id = ui->tableWidget_Ranking->item(Linha_Atual,0)->text();    //pega o valor do identificador para exibir os detalhes através dele
+
+    Details Janela_Detalhes_Motor(this,id);
+    Janela_Detalhes_Motor.exec();
+}
+
+void Results::on_Btn_PlotPolar_clicked()
+{
+    VectorXd Notas(6);
+
+    int Linha_Atual = ui->tableWidget_Ranking->currentRow();
+    QString id = ui->tableWidget_Ranking->item(Linha_Atual,0)->text();    //pega o valor do identificador para exibir os detalhes através dele
+
+    //abre a nova janela com o gráafico polar
+    //este codigo vai na janela do gráfico polar
+    QSqlQuery query;
+    query.prepare("select * from tb_Modulacao where ID = '"+id+"'");
+    if(query.exec())
+    {
+        query.first();
+
     }
 }

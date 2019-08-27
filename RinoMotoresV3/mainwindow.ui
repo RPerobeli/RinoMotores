@@ -108,7 +108,7 @@ color:#fff;</string>
        <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>Tipo de motor desejado:</string>
+          <string>Foco de motor desejado:</string>
          </property>
         </widget>
        </item>

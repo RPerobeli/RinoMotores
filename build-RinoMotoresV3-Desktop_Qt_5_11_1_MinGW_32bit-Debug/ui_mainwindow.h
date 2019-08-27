@@ -159,7 +159,7 @@ public:
         comboBox_Aplicacao->setItemText(3, QApplication::translate("MainWindow", "VSSS", nullptr));
         comboBox_Aplicacao->setItemText(4, QApplication::translate("MainWindow", "Outros", nullptr));
 
-        label_2->setText(QApplication::translate("MainWindow", "Tipo de motor desejado:", nullptr));
+        label_2->setText(QApplication::translate("MainWindow", "Foco de motor desejado:", nullptr));
         comboBox->setItemText(0, QApplication::translate("MainWindow", "Selecione", nullptr));
         comboBox->setItemText(1, QApplication::translate("MainWindow", "R\303\241pido", nullptr));
         comboBox->setItemText(2, QApplication::translate("MainWindow", "Forte", nullptr));

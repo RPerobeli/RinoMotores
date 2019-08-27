@@ -30,9 +30,9 @@ public:
     QLabel *label;
     QTableWidget *tableWidget_Ranking;
     QPushButton *Btn_Fechar;
-    QWidget *widget;
+    QWidget *layoutWidget1;
     QHBoxLayout *horizontalLayout;
-    QPushButton *Btn_Expandir;
+    QPushButton *Btn_Detalhes;
     QPushButton *Btn_PlotPolar;
     QPushButton *Btn_PlotLinear;
 
@@ -81,27 +81,27 @@ public:
         Btn_Fechar->setGeometry(QRect(410, 540, 80, 25));
         Btn_Fechar->setStyleSheet(QLatin1String("background-color:#c73232;\n"
 "color:#fff;"));
-        widget = new QWidget(Results);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(10, 540, 283, 27));
-        horizontalLayout = new QHBoxLayout(widget);
+        layoutWidget1 = new QWidget(Results);
+        layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(10, 540, 312, 27));
+        horizontalLayout = new QHBoxLayout(layoutWidget1);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        Btn_Expandir = new QPushButton(widget);
-        Btn_Expandir->setObjectName(QStringLiteral("Btn_Expandir"));
-        Btn_Expandir->setStyleSheet(QLatin1String("background-color:#c73232;\n"
+        Btn_Detalhes = new QPushButton(layoutWidget1);
+        Btn_Detalhes->setObjectName(QStringLiteral("Btn_Detalhes"));
+        Btn_Detalhes->setStyleSheet(QLatin1String("background-color:#c73232;\n"
 "color:#fff;"));
 
-        horizontalLayout->addWidget(Btn_Expandir);
+        horizontalLayout->addWidget(Btn_Detalhes);
 
-        Btn_PlotPolar = new QPushButton(widget);
+        Btn_PlotPolar = new QPushButton(layoutWidget1);
         Btn_PlotPolar->setObjectName(QStringLiteral("Btn_PlotPolar"));
         Btn_PlotPolar->setStyleSheet(QLatin1String("background-color:#c73232;\n"
 "color:#fff;"));
 
         horizontalLayout->addWidget(Btn_PlotPolar);
 
-        Btn_PlotLinear = new QPushButton(widget);
+        Btn_PlotLinear = new QPushButton(layoutWidget1);
         Btn_PlotLinear->setObjectName(QStringLiteral("Btn_PlotLinear"));
         Btn_PlotLinear->setStyleSheet(QLatin1String("background-color:#c73232;\n"
 "color:#fff;"));
@@ -127,9 +127,9 @@ public:
         QTableWidgetItem *___qtablewidgetitem3 = tableWidget_Ranking->horizontalHeaderItem(3);
         ___qtablewidgetitem3->setText(QApplication::translate("Results", "Nota Final", nullptr));
         Btn_Fechar->setText(QApplication::translate("Results", "Fechar", nullptr));
-        Btn_Expandir->setText(QApplication::translate("Results", "Expandir Motor", nullptr));
+        Btn_Detalhes->setText(QApplication::translate("Results", "Detalhes Motor", nullptr));
         Btn_PlotPolar->setText(QApplication::translate("Results", "Gr\303\241fico Polar", nullptr));
-        Btn_PlotLinear->setText(QApplication::translate("Results", "Simular Motor", nullptr));
+        Btn_PlotLinear->setText(QApplication::translate("Results", "Performance Motor", nullptr));
     } // retranslateUi
 
 };

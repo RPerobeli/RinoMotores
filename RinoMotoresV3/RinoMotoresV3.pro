@@ -29,7 +29,8 @@ SOURCES += \
     add_motor.cpp \
     results.cpp \
     edit_motor.cpp \
-    dadosrobo.cpp
+    dadosrobo.cpp \
+    details.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -38,7 +39,8 @@ HEADERS += \
     results.h \
     edit_motor.h \
     dadosrobo.h \
-    libcalculus.h
+    libcalculus.h \
+    details.h
 
 FORMS += \
         mainwindow.ui \
@@ -46,7 +48,8 @@ FORMS += \
     add_motor.ui \
     results.ui \
     edit_motor.ui \
-    dadosrobo.ui
+    dadosrobo.ui \
+    details.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -28,6 +28,10 @@ public:
 private slots:
     void on_Btn_Fechar_clicked();
 
+    void on_Btn_Detalhes_clicked();
+
+    void on_Btn_PlotPolar_clicked();
+
 private:
     Ui::Results *ui;
 };

@@ -22,7 +22,6 @@ using namespace std;
 #define erro 0.00001 //erro permitido pelo metodo rungekutta
 
 MatrixXd Ponderacao(int indice,MatrixXd notasModuladas,MatrixXd notasTestes)
-
 {
 
     MatrixXd PesosMinisumo(4,6);
@@ -39,9 +38,9 @@ MatrixXd Ponderacao(int indice,MatrixXd notasModuladas,MatrixXd notasTestes)
     for(int i=0;i<notasPesadas.cols();i++)
     {
         notasPesadas(0,i) = notasTestes(0,i);
-        for(int j=0;j<notasModuladas.rows();j++)
+        for(int j=1;j<notasModuladas.rows();j++)
         {
-            notasPesadas(1,i) = notasPesadas(1,i)+ PesosMinisumo(indice-1,j)*notasModuladas(j,i);
+            notasPesadas(1,i) = notasPesadas(1,i)+ PesosMinisumo(indice-1,j-1)*notasModuladas(j,i);
         }
     }
     return notasPesadas;
@@ -74,20 +73,35 @@ double Absolute(double x)
 MatrixXd Modula_Notas(VectorXd vetorDeMaximos, MatrixXd notasTestes)
 {
     //função que recebe vetor com as notas e vetor com os máximos, e retorna um vetor com as notas moduladas
-    MatrixXd notasModuladas(6,notasTestes.cols());
+    MatrixXd notasModuladas(7,notasTestes.cols());
 
     for(int cont=0;cont<notasTestes.cols();cont++)
     {
+        //Armazena o ID
+        notasModuladas(0,cont) = notasTestes(0,cont);
         //Tempos:
-        notasModuladas(0,cont) = Absolute((-5/vetorDeMaximos(0))*notasTestes(1,cont)+5);
-        notasModuladas(1,cont) = Absolute((-5/vetorDeMaximos(1))*notasTestes(2,cont)+5);
-        notasModuladas(2,cont) = Absolute((-5/vetorDeMaximos(2))*notasTestes(3,cont)+5);
+        notasModuladas(1,cont) = Absolute((-5/vetorDeMaximos(0))*notasTestes(1,cont)+5);
+        notasModuladas(2,cont) = Absolute((-5/vetorDeMaximos(1))*notasTestes(2,cont)+5);
+        notasModuladas(3,cont) = Absolute((-5/vetorDeMaximos(2))*notasTestes(3,cont)+5);
         //eficiencia
-        notasModuladas(3,cont) = Absolute((5/vetorDeMaximos(3))*notasTestes(4,cont));
+        if(vetorDeMaximos(3)==0)
+        {
+            notasModuladas(4,cont) = 0;
+        }else
+        {
+            notasModuladas(4,cont) = Absolute((5/vetorDeMaximos(3))*notasTestes(4,cont));
+        }
+
         //preço
-        notasModuladas(4,cont) = Absolute((-5/vetorDeMaximos(4))*notasTestes(5,cont)+5);
+        notasModuladas(5,cont) = Absolute((-5/vetorDeMaximos(4))*notasTestes(5,cont)+5);
         //vel maxima
-        notasModuladas(5,cont) = Absolute((5/vetorDeMaximos(5))*notasTestes(6,cont));
+        if(vetorDeMaximos(5)==0)
+        {
+            notasModuladas(6,cont) = 0;
+        }else
+        {
+            notasModuladas(6,cont) = Absolute((5/vetorDeMaximos(5))*notasTestes(6,cont));
+        }
     }
     return notasModuladas;
 }
@@ -115,6 +129,7 @@ MatrixXd Ordena_Matriz(MatrixXd matrix)
     }
     return matrix;
 }
+
 void Adequa_Unidades_Robo_SI(double *Massa,double *Raio)
 {
     *Massa = *Massa/1000; //g --> kg
@@ -125,6 +140,7 @@ void Adequa_Unidades_Robo_SI(double *Massa,double *Raio)
     qDebug()<<"Massa= "+massa_str+"kg  Raio= "+Raio_str+"m";
 */
 }
+
 void Adequa_Unidades_SI(double *Torque_max,double *Kv,double *Rot_max, double *Kt, double g)
 {
     //qDebug()<<"Adequou as unidades";
@@ -166,6 +182,36 @@ int Verifica_Num_Motores(int indice_QtdMotores)
     return n;
 }
 
+void Grava_Notas_Moduladas(MatrixXd notasModuladas)
+{
+    QSqlQuery query;
+
+    query.prepare("delete from tb_Modulacao");
+    if(query.exec())
+    {
+        qDebug()<<"Sucesso em Excluir Notas Moduladas";
+    }
+    for(int i=0; i<notasModuladas.cols();i++)
+    {
+        QString id = QString::number(notasModuladas(0,i),'g',6);
+        QString tArr = QString::number(notasModuladas(1,i),'g',6);
+        QString tRev = QString::number(notasModuladas(2,i),'g',6);
+        QString tEmp = QString::number(notasModuladas(3,i),'g',6);
+        QString Eff = QString::number(notasModuladas(4,i),'g',6);
+        QString Preco = QString::number(notasModuladas(5,i),'g',6);
+        QString vel_max = QString::number(notasModuladas(6,i),'g',6);
+        query.prepare("insert into tb_Modulacao (ID,tempoArrancada,tempoReversao,tempoEmpurrao,eficiencia,preco,vel_max)"
+                      "values('"+id+"','"+tArr+"','"+tRev+"','"+tEmp+"','"+Eff+"','"+Preco+"','"+vel_max+"')");
+        if(query.exec())
+        {
+            //qDebug()<<"Sucesso em Gravar Notas Moduladas";
+        }else
+        {
+            qDebug()<<"Erro em Gravar Notas Moduladas";
+        }
+    }
+
+}
 //Vector3d Array_Final(MatrixXd resultados)
 //{
 //    cout <<"Entrou no ArrayFinal"<<endl;
@@ -328,7 +374,7 @@ MatrixXd Resultado_Final_Minisumo(double Massa,double Raio, double ForcaResisten
                                     //4- eficiencia
                                     //5- preco
                                     //6- velocidade maxima
-        MatrixXd notasModuladas(6,QtdMotores);
+        MatrixXd notasModuladas(7,QtdMotores);
         Adequa_Unidades_Robo_SI(&Massa,&Raio);
 
         while(query.next())//enquanto houver um motor
@@ -366,11 +412,6 @@ MatrixXd Resultado_Final_Minisumo(double Massa,double Raio, double ForcaResisten
             notasTestes(1,cont) = finalArrancada(3); //tempo
             vetorDeMaximos(0)= Maior(finalArrancada(3),vetorDeMaximos(0));
 
-            QString tempoArr = QString::number(notasTestes(1),'g',6);
-            QString corr = QString::number(finalArrancada(0),'g',6);
-            QString vel = QString::number(finalArrancada(1),'g',6);
-            //qDebug()<<"tempoArr "+tempoArr+ " "+corr+" "+vel;
-
             //Teste de Reversão
             X_0 << -finalArrancada(0), //corrente elétrica
                    -finalArrancada(1), //velocidade linear
@@ -382,10 +423,6 @@ MatrixXd Resultado_Final_Minisumo(double Massa,double Raio, double ForcaResisten
             notasTestes(2,cont) = finalReversao(3);
             vetorDeMaximos(1)= Maior(finalReversao(3),vetorDeMaximos(1));
 
-
-//            QString tempoRev = QString::number(notasTestes(2),'g',6);
-//            qDebug()<<"tempoRev "+tempoRev;
-
             //Teste do Empurrão
             X_0 << 0,0,0;
 
@@ -395,15 +432,16 @@ MatrixXd Resultado_Final_Minisumo(double Massa,double Raio, double ForcaResisten
             notasTestes(3,cont) = finalEmpurrao(3);
             vetorDeMaximos(2)= Maior(finalEmpurrao(3),vetorDeMaximos(2));
 
-//            QString tempoEmp = QString::number(notasTestes(3),'g',6);
-//            qDebug()<<"tempoEmp "+tempoEmp;
-
             //Eficiência no ponto de operação
             double i_final = finalEmpurrao(0);
             //cout <<"i_final\n"<<i_final <<endl;
             double w_final = finalEmpurrao(1)/Raio;
             //cout <<"w_final\n"<<w_final <<endl;
-            double torque = Absolute(Kt*i_final - ForcaResistente*Raio);
+            double torque = Kt*i_final*Reducao - ForcaResistente*Raio;
+            if(torque<0)
+            {
+                torque = 0;
+            }
             double potenciaMecanica = torque*w_final;
             //cout <<"potenciaMecanica\n"<<potenciaMecanica <<endl;
             double potenciaEletrica = R*(pow(i_final,2));
@@ -429,6 +467,7 @@ MatrixXd Resultado_Final_Minisumo(double Massa,double Raio, double ForcaResisten
         //modula as notas entre 0 e 5
         notasModuladas = Modula_Notas(vetorDeMaximos,notasTestes);
         //cout << "matriz de notas moduladas:\n" << notasModuladas << endl;
+        Grava_Notas_Moduladas(notasModuladas);
 
         //faz ponderação
         notasFinais = Ponderacao(indicePesos, notasModuladas, notasTestes);
@@ -448,22 +487,6 @@ MatrixXd Resultado_Final_Minisumo(double Massa,double Raio, double ForcaResisten
 
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
 double* Resultado_Final_Seguidor()
 {
