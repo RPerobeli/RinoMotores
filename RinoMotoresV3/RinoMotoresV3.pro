@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui widgets sql
+QT       += core gui widgets sql charts
 
 TARGET = RinoMotoresV3
 TEMPLATE = app
@@ -30,7 +30,9 @@ SOURCES += \
     results.cpp \
     edit_motor.cpp \
     dadosrobo.cpp \
-    details.cpp
+    details.cpp \
+    polarwindow.cpp \
+    polarwindowmain.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,7 +42,9 @@ HEADERS += \
     edit_motor.h \
     dadosrobo.h \
     libcalculus.h \
-    details.h
+    details.h \
+    polarwindow.h \
+    polarwindowmain.h
 
 FORMS += \
         mainwindow.ui \
@@ -49,7 +53,9 @@ FORMS += \
     results.ui \
     edit_motor.ui \
     dadosrobo.ui \
-    details.ui
+    details.ui \
+    polarwindow.ui \
+    polarwindowmain.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -26,10 +26,10 @@ MatrixXd Ponderacao(int indice,MatrixXd notasModuladas,MatrixXd notasTestes)
 
     MatrixXd PesosMinisumo(4,6);
                     //Arrancada / Reversao / Empurrao / eficiencia / Preco / velMax
-    PesosMinisumo << 0.25,       0.20,      0.1,        0.05,       0.1,    0.3,  //Rapido
-                     0.25,       0.15,      0.3,        0.05,       0.1,    0.15, //Forte
-                     0.15,       0.1,       0.15,       0.3,        0.15,   0.15, //Eficiente
-                     0.15,       0.15,      0.2,        0.15,       0.3,    0.05; //Barato
+    PesosMinisumo << 0.25,       0.25,      0.1,        0.05,       0.05,    0.3,  //Rapido
+                     0.20,       0.20,      0.3,        0.05,       0.1,    0.15, //Forte
+                     0.15,       0.15,       0.15,       0.3,        0.1,   0.15, //Eficiente
+                     0.15,       0.15,      0.15,        0.1,       0.3,    0.15; //Barato
     //cout <<"Pesos:\n"<<PesosMinisumo<<endl;
 
     MatrixXd notasPesadas(2,notasModuladas.cols());
