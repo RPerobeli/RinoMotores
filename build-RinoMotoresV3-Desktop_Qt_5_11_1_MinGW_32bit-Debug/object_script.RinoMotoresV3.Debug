@@ -7,6 +7,7 @@ INPUT(
 ./debug\edit_motor.o
 ./debug\dadosrobo.o
 ./debug\details.o
+./debug\polarwindowmain.o
 ./debug\moc_mainwindow.o
 ./debug\moc_motoreswindow.o
 ./debug\moc_add_motor.o
@@ -14,4 +15,5 @@ INPUT(
 ./debug\moc_edit_motor.o
 ./debug\moc_dadosrobo.o
 ./debug\moc_details.o
+./debug\moc_polarwindowmain.o
 );

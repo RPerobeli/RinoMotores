@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 
+
 namespace Ui {
 class PolarWindowMain;
 }
@@ -17,6 +18,7 @@ public:
 
 private:
     Ui::PolarWindowMain *ui;
+
 };
 
 #endif // POLARWINDOWMAIN_H

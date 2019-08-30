@@ -31,7 +31,6 @@ SOURCES += \
     edit_motor.cpp \
     dadosrobo.cpp \
     details.cpp \
-    polarwindow.cpp \
     polarwindowmain.cpp
 
 HEADERS += \
@@ -43,7 +42,6 @@ HEADERS += \
     dadosrobo.h \
     libcalculus.h \
     details.h \
-    polarwindow.h \
     polarwindowmain.h
 
 FORMS += \
@@ -54,7 +52,6 @@ FORMS += \
     edit_motor.ui \
     dadosrobo.ui \
     details.ui \
-    polarwindow.ui \
     polarwindowmain.ui
 
 # Default rules for deployment.

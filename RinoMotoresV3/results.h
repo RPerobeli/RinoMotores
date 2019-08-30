@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <QFileInfo>
 #include "QMessageBox"
+#include "polarwindowmain.h"
 
 using namespace Eigen;
 
@@ -34,6 +35,7 @@ private slots:
 
 private:
     Ui::Results *ui;
+    PolarWindowMain *Polarwindow;
 };
 
 #endif // RESULTS_H
