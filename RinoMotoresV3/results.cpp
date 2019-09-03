@@ -107,23 +107,24 @@ void Results::on_Btn_PlotPolar_clicked()
             cout <<Valores(i) <<endl;
         }
 
-        const qreal angularMin = -100;
-        const qreal angularMax = 100;
+        const qreal angularMin = 0;
+        const qreal angularMax = 360;
 
-        const qreal radialMin = -100;
-        const qreal radialMax = 100;
+        const qreal radialMin = 0;
+        const qreal radialMax = 5;
 
         QLineSeries *series3 = new QLineSeries();
         series3->setName("star outer");
         qreal ad = (angularMax - angularMin) / 6;
-        qreal rd = (radialMax - radialMin) / 3 * 1.3;
-        series3->append(angularMin, radialMax);
-        series3->append(angularMin + ad*1, radialMin + rd);
-        series3->append(angularMin + ad*2, radialMax);
-        series3->append(angularMin + ad*3, radialMin + rd);
-        series3->append(angularMin + ad*4, radialMax);
-        series3->append(angularMin + ad*5, radialMin + rd);
-        series3->append(angularMin + ad*6, radialMax);
+        //qreal rd = (radialMax - radialMin) / 3 * 1.3;
+        //series3->append(angularMin, radialMax);
+        series3->append(angularMin, Valores(0));
+        series3->append(angularMin + ad*1, Valores(1));
+        series3->append(angularMin + ad*2, Valores(2));
+        series3->append(angularMin + ad*3, Valores(3));
+        series3->append(angularMin + ad*4, Valores(4));
+        series3->append(angularMin + ad*5, Valores(5));
+        series3->append(angularMin + ad*6, Valores(0));
 
 
         QAreaSeries *series5 = new QAreaSeries();
