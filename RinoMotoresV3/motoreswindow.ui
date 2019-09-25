@@ -61,6 +61,11 @@ color:#fff;</string>
    </item>
    <item>
     <property name="text">
+     <string>Preço</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
      <string>Reducao</string>
     </property>
    </item>

@@ -33,6 +33,8 @@ private slots:
 
     void on_Btn_PlotPolar_clicked();
 
+    void on_tableWidget_Ranking_cellClicked(int row, int column);
+
 private:
     Ui::Results *ui;
     PolarWindowMain *Polarwindow;

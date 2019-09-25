@@ -130,6 +130,9 @@ void DadosRobo::on_BtnOK_clicked()
      if(query.exec())
      {
         qDebug()<<"SUCESSO ao atualizar registro do robo";
+        QMessageBox MsgBox;
+        MsgBox.setText("Sucesso, pressione o botão CALCULAR.");
+        MsgBox.exec();
 
      }
      else

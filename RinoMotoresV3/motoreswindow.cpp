@@ -119,6 +119,7 @@ MotoresWindow::~MotoresWindow()
 void MotoresWindow::on_Btn_Fechar_clicked()
 {
     this->close();
+    //QMessageBox::information(this,"SUCESSO","Motores atualizados, insira os dados do robô e pressione calcular.");
 }
 
 void MotoresWindow::on_Btn_Adicionar_clicked()
@@ -206,6 +207,10 @@ void MotoresWindow::on_Btn_Consultar_clicked()
            ui->tableWidget->setItem(linha,9,new QTableWidgetItem(query.value(9).toString()));
            ui->tableWidget->setItem(linha,10,new QTableWidgetItem(query.value(10).toString()));
            linha++;
+        }
+        if(linha ==0)
+        {
+            QMessageBox::information(this,"NÃO ENCONTRADO","Nenhum motor corresponde à pesquisa");
         }
         Propriedades_Tabela();
     }else

@@ -37,6 +37,9 @@ Results::Results(QWidget *parent, MatrixXd* Matriz) :
     //preenche o table widget com a matriz resultante
     Preenche_Tabela_Resultados(*Matriz);
 
+    ui->Btn_Detalhes->setEnabled(false);
+    ui->Btn_PlotPolar->setEnabled(false);
+    ui->Btn_PlotLinear->setEnabled(false);
 }
 
 Results::~Results()
@@ -86,12 +89,15 @@ void Results::on_Btn_Detalhes_clicked()
 
     Details Janela_Detalhes_Motor(this,id);
     Janela_Detalhes_Motor.exec();
+
+    ui->Btn_Detalhes->setEnabled(false);
 }
 
 void Results::on_Btn_PlotPolar_clicked()
 {
     int Linha_Atual = ui->tableWidget_Ranking->currentRow();
     QString id = ui->tableWidget_Ranking->item(Linha_Atual,0)->text();    //pega o valor do identificador para exibir os detalhes através dele
+    QString nome = ui->tableWidget_Ranking->item(Linha_Atual,1)->text();
 
     //abre a nova janela com o gráafico polar
     //este codigo vai na janela do gráfico polar
@@ -114,21 +120,20 @@ void Results::on_Btn_PlotPolar_clicked()
         const qreal radialMax = 5;
 
         QLineSeries *series3 = new QLineSeries();
-        series3->setName("star outer");
+        series3->setName("Motor "+ nome);
         qreal ad = (angularMax - angularMin) / 6;
         //qreal rd = (radialMax - radialMin) / 3 * 1.3;
         //series3->append(angularMin, radialMax);
-        series3->append(angularMin, Valores(0));
-        series3->append(angularMin + ad*1, Valores(1));
-        series3->append(angularMin + ad*2, Valores(2));
-        series3->append(angularMin + ad*3, Valores(3));
-        series3->append(angularMin + ad*4, Valores(4));
-        series3->append(angularMin + ad*5, Valores(5));
-        series3->append(angularMin + ad*6, Valores(0));
-
+        series3->append(angularMin, Valores(0));            // Teste de Arrancada
+        series3->append(angularMin + ad*1, Valores(1));     // Teste de Reversão
+        series3->append(angularMin + ad*2, Valores(2));     // Teste do Empurrão
+        series3->append(angularMin + ad*3, Valores(3));     // Eficiência
+        series3->append(angularMin + ad*4, Valores(4));     // Preço
+        series3->append(angularMin + ad*5, Valores(5));     // Velocidade máxima
+        series3->append(angularMin + ad*6, Valores(0));     // Arrancada novamente para fechar o gráfico
 
         QAreaSeries *series5 = new QAreaSeries();
-        series5->setName("star area");
+        series5->setName("Area");
         series5->setUpperSeries(series3);
         series5->setOpacity(0.5);
 
@@ -136,7 +141,7 @@ void Results::on_Btn_PlotPolar_clicked()
         chart->addSeries(series3);
         chart->addSeries(series5);
 
-        chart->setTitle("Use arrow keys to scroll, +/- to zoom, and space to switch chart type.");
+        chart->setTitle("NOTAS DE CADA TESTE PARA O MOTOR: "+nome+".");
 
         QValueAxis *angularAxis = new QValueAxis();
         angularAxis->setTickCount(7); // First and last ticks are co-located on 0/360 angle.
@@ -144,6 +149,8 @@ void Results::on_Btn_PlotPolar_clicked()
         angularAxis->setShadesVisible(true);
         angularAxis->setShadesBrush(QBrush(QColor(249, 249, 255)));
         chart->addAxis(angularAxis, QPolarChart::PolarOrientationAngular);
+
+        //QLegend *legend = new QLegend();
 
         QValueAxis *radialAxis = new QValueAxis();
         radialAxis->setTickCount(7);
@@ -168,5 +175,12 @@ void Results::on_Btn_PlotPolar_clicked()
         Polarwindow->show();
     }
 
+    ui->Btn_PlotPolar->setEnabled(false);
+}
 
+void Results::on_tableWidget_Ranking_cellClicked(int row, int column)
+{
+    ui->Btn_Detalhes->setEnabled(true);
+    ui->Btn_PlotPolar->setEnabled(true);
+    ui->Btn_PlotLinear->setEnabled(true);
 }

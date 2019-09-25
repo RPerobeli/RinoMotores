@@ -236,9 +236,8 @@ void MainWindow::Calc_Dados_Auxiliares(double Massa, double Comprimento, double 
         {
             reacoes = Calc_Reacoes_Apoio(Peso, Comprimento, CentroDeGravidade, E1);
 
-            QString reacoes0 = QString::number(reacoes[0]);
-            QString reacoes1 = QString::number(reacoes[1]);
-
+            //QString reacoes0 = QString::number(reacoes[0]);
+            //QString reacoes1 = QString::number(reacoes[1]);
             //qDebug()<<"Reacao traseiro ="+ reacoes0;
             //qDebug()<<"Reacao dianteiro ="+ reacoes1;
 

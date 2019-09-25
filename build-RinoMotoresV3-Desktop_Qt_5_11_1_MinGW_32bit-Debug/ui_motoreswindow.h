@@ -60,6 +60,7 @@ public:
         comboBox_Pesquisa->addItem(QString());
         comboBox_Pesquisa->addItem(QString());
         comboBox_Pesquisa->addItem(QString());
+        comboBox_Pesquisa->addItem(QString());
         comboBox_Pesquisa->setObjectName(QStringLiteral("comboBox_Pesquisa"));
         comboBox_Pesquisa->setGeometry(QRect(10, 620, 141, 24));
         comboBox_Pesquisa->setStyleSheet(QLatin1String("background-color:#c73232;\n"
@@ -181,9 +182,10 @@ public:
         comboBox_Pesquisa->setItemText(3, QApplication::translate("MotoresWindow", "CorrenteMin", nullptr));
         comboBox_Pesquisa->setItemText(4, QApplication::translate("MotoresWindow", "Rota\303\247\303\243oMax", nullptr));
         comboBox_Pesquisa->setItemText(5, QApplication::translate("MotoresWindow", "TorqueMax", nullptr));
-        comboBox_Pesquisa->setItemText(6, QApplication::translate("MotoresWindow", "Reducao", nullptr));
-        comboBox_Pesquisa->setItemText(7, QApplication::translate("MotoresWindow", "Kt", nullptr));
-        comboBox_Pesquisa->setItemText(8, QApplication::translate("MotoresWindow", "Kv", nullptr));
+        comboBox_Pesquisa->setItemText(6, QApplication::translate("MotoresWindow", "Pre\303\247o", nullptr));
+        comboBox_Pesquisa->setItemText(7, QApplication::translate("MotoresWindow", "Reducao", nullptr));
+        comboBox_Pesquisa->setItemText(8, QApplication::translate("MotoresWindow", "Kt", nullptr));
+        comboBox_Pesquisa->setItemText(9, QApplication::translate("MotoresWindow", "Kv", nullptr));
 
         Btn_Consultar->setText(QApplication::translate("MotoresWindow", "Consultar Motor", nullptr));
         Btn_Excluir->setText(QApplication::translate("MotoresWindow", "Excluir Selecionados", nullptr));
