@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>508</width>
+    <width>649</width>
     <height>578</height>
    </rect>
   </property>
@@ -22,7 +22,7 @@
     <rect>
      <x>10</x>
      <y>30</y>
-     <width>481</width>
+     <width>631</width>
      <height>491</height>
     </rect>
    </property>
@@ -58,7 +58,7 @@ color:#fff;</string>
       </column>
       <column>
        <property name="text">
-        <string>Fabricante</string>
+        <string>Fabricante/Modelo</string>
        </property>
       </column>
       <column>
@@ -71,6 +71,11 @@ color:#fff;</string>
         <string>Nota Final</string>
        </property>
       </column>
+      <column>
+       <property name="text">
+        <string>Deslizamento</string>
+       </property>
+      </column>
      </widget>
     </item>
    </layout>
@@ -78,9 +83,9 @@ color:#fff;</string>
   <widget class="QPushButton" name="Btn_Fechar">
    <property name="geometry">
     <rect>
-     <x>410</x>
+     <x>529</x>
      <y>540</y>
-     <width>80</width>
+     <width>111</width>
      <height>25</height>
     </rect>
    </property>

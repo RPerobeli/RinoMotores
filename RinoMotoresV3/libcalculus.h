@@ -20,6 +20,8 @@ using namespace std;
 #define raioDojo 0.77/2
 #define pi 3.141589
 #define erro 0.00001 //erro permitido pelo metodo rungekutta
+//#define B 0.0005 //constante de atrito viscoso
+#define B 0.00001
 
 MatrixXd Ponderacao(int indice,MatrixXd notasModuladas,MatrixXd notasTestes)
 {
@@ -32,12 +34,12 @@ MatrixXd Ponderacao(int indice,MatrixXd notasModuladas,MatrixXd notasTestes)
                      0.15,       0.15,      0.15,        0.1,       0.3,    0.15; //Barato
     //cout <<"Pesos:\n"<<PesosMinisumo<<endl;
 
-    MatrixXd notasPesadas(2,notasModuladas.cols());
-    notasPesadas = MatrixXd::Zero(2,notasModuladas.cols());
-
+    MatrixXd notasPesadas(3,notasModuladas.cols());
+    notasPesadas = MatrixXd::Zero(3,notasModuladas.cols());
     for(int i=0;i<notasPesadas.cols();i++)
     {
-        notasPesadas(0,i) = notasTestes(0,i);
+        notasPesadas(0,i) = notasTestes(0,i); //ID do motor
+        notasPesadas(2,i) = notasTestes(8,i); //Flag se derrapa ou não
         for(int j=1;j<notasModuladas.rows();j++)
         {
             notasPesadas(1,i) = notasPesadas(1,i)+ PesosMinisumo(indice-1,j-1)*notasModuladas(j,i);
@@ -80,9 +82,18 @@ MatrixXd Modula_Notas(VectorXd vetorDeMaximos, MatrixXd notasTestes)
         //Armazena o ID
         notasModuladas(0,cont) = notasTestes(0,cont);
         //Tempos:
-        notasModuladas(1,cont) = Absolute((-5/vetorDeMaximos(0))*notasTestes(1,cont)+5);
-        notasModuladas(2,cont) = Absolute((-5/vetorDeMaximos(1))*notasTestes(2,cont)+5);
-        notasModuladas(3,cont) = Absolute((-5/vetorDeMaximos(2))*notasTestes(3,cont)+5);
+        notasModuladas(1,cont) = Absolute((-5/vetorDeMaximos(0))*notasTestes(1,cont)+5); //Arrancada
+        notasModuladas(2,cont) = Absolute((-5/vetorDeMaximos(1))*notasTestes(2,cont)+5); //Reversão
+
+        //Empurrão
+        if(notasTestes(7,cont) != 0) //confere a flag se o motor falhou em empurrar
+        {
+            notasModuladas(3,cont) = 0;
+        }else
+        {
+            notasModuladas(3,cont) = Absolute((-5/vetorDeMaximos(2))*notasTestes(3,cont)+5);
+        }
+
         //eficiencia
         if(vetorDeMaximos(3)==0)
         {
@@ -226,13 +237,14 @@ void Grava_Notas_Moduladas(MatrixXd notasModuladas)
 //    return X_final;
 //}
 
-Vector4d RungeKutta4_limitado(Vector3d X_0, double F_res, double V, double Kt, double Kv, double GearRatio, double m,double r)
+VectorXd RungeKutta4_limitado(Vector3d X_0, double F_res, double V, double Kt, double Kv, double GearRatio, double m,double r)
 {
     //qDebug()<<"Entrou no RK4 limitado";
     Vector3d X(3); X << 0,0,0;
-    Vector4d Result; Result<<0,0,0,0;
+    VectorXd Result(5); Result<<0,0,0,0,0;
     double t = 0;
     int cont = 0;
+
 
     X << X_0(0),X_0(1),X_0(2);
 
@@ -255,7 +267,7 @@ Vector4d RungeKutta4_limitado(Vector3d X_0, double F_res, double V, double Kt, d
         //cout<<"while do RK4 - iteracao "<< cont<<endl;
 
         //armazenamento das variáveis
-        Result << X(0),X(1),X(2),t;
+        Result << X(0),X(1),X(2),t,0;
         //MatrizResultados(0,cont) = X(0);//corrente
         //MatrizResultados(1,cont) = X(1);//velocidade
         //MatrizResultados(2,cont) = X(2);//posição
@@ -263,7 +275,7 @@ Vector4d RungeKutta4_limitado(Vector3d X_0, double F_res, double V, double Kt, d
 
         //equações do sistema
         double eq1 = V/l -((R/l)*X(0))-(((Kv*GearRatio)/(l*r))*X(1));
-        double eq2 = ((Kt*GearRatio)/(m*r)*X(0)-(F_res/m));
+        double eq2 = ((Kt*GearRatio)/(m*r)*X(0)-(F_res/m) - (B*GearRatio)/(m*r*r)*X(1));
         double eq3 = X(1);
 
         Vector3d F1; F1 << eq1, eq2, eq3;
@@ -285,7 +297,8 @@ Vector4d RungeKutta4_limitado(Vector3d X_0, double F_res, double V, double Kt, d
     }
     if(Result(2)<0)
     {
-        Result(3)=30;
+        //Result(3)=10;
+        Result(4)= 1; //flag que retorna 1 quando o motor falha e é empurrado.
     }
     //cout <<"result"<<Result<<endl;
     return Result;
@@ -332,7 +345,7 @@ Vector4d RungeKutta4_Convergente(Vector3d X_0,double F_res, double V, double Kt,
 
         //equações do sistema
         double eq1 = V/l -((R/l)*X(0))-(((Kv*GearRatio)/(l*r))*X(1));
-        double eq2 = ((Kt*GearRatio)/(m*r)*X(0)-(F_res/m));
+        double eq2 = ((Kt*GearRatio)/(m*r)*X(0)-(F_res/m)- (B*GearRatio)/(m*r*r)*X(1));
         double eq3 = X(1);
 
         Vector3d F1; F1 << eq1, eq2, eq3;
@@ -353,18 +366,19 @@ Vector4d RungeKutta4_Convergente(Vector3d X_0,double F_res, double V, double Kt,
     return Result;
 }
 
-MatrixXd Resultado_Final_Minisumo(double Massa,double Raio, double ForcaResistente,int indice_QtdMotores, double Gravidade, int QtdMotores, int indicePesos)
+MatrixXd Resultado_Final_Minisumo(double Massa,double Raio, double ForcaResistente,int indice_QtdMotores, double Gravidade, int QtdMotores, int indicePesos, double torqueMaximo)
 {
-    //obtém a quantidade de motores:
-    int numMotores = Verifica_Num_Motores(indice_QtdMotores);
-    ForcaResistente = ForcaResistente/numMotores;
+    //obtém a quantidade de motores no robô:
+    //int numMotores = Verifica_Num_Motores(indice_QtdMotores);
+    //ForcaResistente = ForcaResistente/numMotores; //Supondo que a força resistente se divida entre os motores
+
     //faz o loop para todos os testes e motores
     QSqlQuery query;
     query.prepare("select * from tb_Motores");
     if(query.exec())
     {
-        MatrixXd notasTestes(7,QtdMotores);
-        MatrixXd notasFinais(2,QtdMotores);
+        MatrixXd notasTestes(9,QtdMotores);
+        MatrixXd notasFinais(3,QtdMotores);
         int cont=0;
 
         VectorXd vetorDeMaximos(6); //armazena os parâmetros máximos para cada teste, onde posição:
@@ -390,7 +404,7 @@ MatrixXd Resultado_Final_Minisumo(double Massa,double Raio, double ForcaResisten
             double Kt = query.value(3).toDouble();
             double Kv = query.value(4).toDouble();
             double Tensao = query.value(5).toDouble();
-            //double I_max = query.value(6).toDouble();
+            double I_max = query.value(6).toDouble();
             //double I_min = query.value(7).toDouble();
             double Rot_max = query.value(8).toDouble();
             double Torque_max = query.value(9).toDouble();
@@ -426,29 +440,53 @@ MatrixXd Resultado_Final_Minisumo(double Massa,double Raio, double ForcaResisten
             //Teste do Empurrão
             X_0 << 0,0,0;
 
-            Vector4d finalEmpurrao = RungeKutta4_limitado(X_0,ForcaResistente, Tensao, Kt, Kv, Reducao, Massa, Raio);
+            VectorXd finalEmpurrao(5);
+            finalEmpurrao = RungeKutta4_limitado(X_0,ForcaResistente, Tensao, Kt, Kv, Reducao, Massa, Raio);
             //Vector3d finalEmpurrao = Array_Final(ResultadosEmpurrao);
             //cout << "final empurrao\n "<<finalEmpurrao<<endl;
             notasTestes(3,cont) = finalEmpurrao(3);
+            notasTestes(7,cont) = finalEmpurrao(4); //recebe a flag e armazena na última linha do vetor com a nota real dos testes
             vetorDeMaximos(2)= Maior(finalEmpurrao(3),vetorDeMaximos(2));
 
             //Eficiência no ponto de operação
             double i_final = finalEmpurrao(0);
+            if(i_final > I_max)
+            {
+                i_final = I_max;
+            }
             //cout <<"i_final\n"<<i_final <<endl;
             double w_final = finalEmpurrao(1)/Raio;
             //cout <<"w_final\n"<<w_final <<endl;
             double torque = Kt*i_final*Reducao - ForcaResistente*Raio;
+
+            //garante que não haja torques negativos, que gerem potencias mecanicas negativas
             if(torque<0)
             {
                 torque = 0;
             }
+            if(torque > Torque_max) //taxa o torque máximo pelo torque máximo  informado pelo fabricante
+            {
+                torque = Torque_max;
+            }
+
+            if(torque > torqueMaximo)
+            {
+                notasTestes(8,cont) = 1; //flag que normalmente é zero recebe 1, caso o motor derrape
+            }else
+            {
+                notasTestes(8,cont) = 0; //flag recebe zero caso o motor não derrape
+            }
+
             double potenciaMecanica = torque*w_final;
             //cout <<"potenciaMecanica\n"<<potenciaMecanica <<endl;
             double potenciaEletrica = R*(pow(i_final,2));
             //cout <<"potenciaEletrica\n"<<potenciaEletrica <<endl;
             //cout <<"---------------------------------"<<endl;
-
             double eficiencia = (potenciaMecanica/potenciaEletrica)*100;
+            if(eficiencia > 100 || eficiencia < 0)
+            {
+                eficiencia = 0;
+            }
             notasTestes(4,cont) = eficiencia;
             vetorDeMaximos(3)= Maior(eficiencia,vetorDeMaximos(3));
             //cout <<"eficiencia:\n"<<eficiencia <<endl;

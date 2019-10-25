@@ -40,12 +40,12 @@ public:
     {
         if (Results->objectName().isEmpty())
             Results->setObjectName(QStringLiteral("Results"));
-        Results->resize(508, 578);
+        Results->resize(649, 578);
         Results->setStyleSheet(QLatin1String("background-color:#fff\n"
 ""));
         layoutWidget = new QWidget(Results);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 30, 481, 491));
+        layoutWidget->setGeometry(QRect(10, 30, 631, 491));
         verticalLayout = new QVBoxLayout(layoutWidget);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
@@ -62,8 +62,8 @@ public:
         verticalLayout->addWidget(label);
 
         tableWidget_Ranking = new QTableWidget(layoutWidget);
-        if (tableWidget_Ranking->columnCount() < 4)
-            tableWidget_Ranking->setColumnCount(4);
+        if (tableWidget_Ranking->columnCount() < 5)
+            tableWidget_Ranking->setColumnCount(5);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
         tableWidget_Ranking->setHorizontalHeaderItem(0, __qtablewidgetitem);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
@@ -72,13 +72,15 @@ public:
         tableWidget_Ranking->setHorizontalHeaderItem(2, __qtablewidgetitem2);
         QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
         tableWidget_Ranking->setHorizontalHeaderItem(3, __qtablewidgetitem3);
+        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
+        tableWidget_Ranking->setHorizontalHeaderItem(4, __qtablewidgetitem4);
         tableWidget_Ranking->setObjectName(QStringLiteral("tableWidget_Ranking"));
 
         verticalLayout->addWidget(tableWidget_Ranking);
 
         Btn_Fechar = new QPushButton(Results);
         Btn_Fechar->setObjectName(QStringLiteral("Btn_Fechar"));
-        Btn_Fechar->setGeometry(QRect(410, 540, 80, 25));
+        Btn_Fechar->setGeometry(QRect(529, 540, 111, 25));
         Btn_Fechar->setStyleSheet(QLatin1String("background-color:#c73232;\n"
 "color:#fff;"));
         layoutWidget1 = new QWidget(Results);
@@ -121,11 +123,13 @@ public:
         QTableWidgetItem *___qtablewidgetitem = tableWidget_Ranking->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("Results", "ID", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget_Ranking->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("Results", "Fabricante", nullptr));
+        ___qtablewidgetitem1->setText(QApplication::translate("Results", "Fabricante/Modelo", nullptr));
         QTableWidgetItem *___qtablewidgetitem2 = tableWidget_Ranking->horizontalHeaderItem(2);
         ___qtablewidgetitem2->setText(QApplication::translate("Results", "Redu\303\247\303\243o", nullptr));
         QTableWidgetItem *___qtablewidgetitem3 = tableWidget_Ranking->horizontalHeaderItem(3);
         ___qtablewidgetitem3->setText(QApplication::translate("Results", "Nota Final", nullptr));
+        QTableWidgetItem *___qtablewidgetitem4 = tableWidget_Ranking->horizontalHeaderItem(4);
+        ___qtablewidgetitem4->setText(QApplication::translate("Results", "Deslizamento", nullptr));
         Btn_Fechar->setText(QApplication::translate("Results", "Fechar", nullptr));
         Btn_Detalhes->setText(QApplication::translate("Results", "Detalhes Motor", nullptr));
         Btn_PlotPolar->setText(QApplication::translate("Results", "Gr\303\241fico Polar", nullptr));

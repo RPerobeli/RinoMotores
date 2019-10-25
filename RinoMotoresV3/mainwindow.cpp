@@ -113,8 +113,20 @@ void MainWindow::on_Btn_Calcular_clicked()
             double E1 = query.value(9).toDouble();
             double E2 = query.value(10).toDouble();
 
-            //Uma vez que a aplicação é válida, calcular os dados auxiliares
-            Calc_Dados_Auxiliares(Massa,Comprimento,CentroDeGravidade,Gravidade,CoefAtrito_estatico,indice_QtdMotores,E1,E2);
+            //Uma vez que a aplicação é válida, calcular os dados auxiliares --> torque máximo até o robô derrapar
+            double torqueMaximo = Calc_Dados_Auxiliares(Massa,Comprimento,CentroDeGravidade,Gravidade,CoefAtrito_estatico,indice_QtdMotores,E1,E2);
+//            QString torqueMaximo_str = QString::number(torqueMaximo,'g',6);
+//            QSqlQuery query2;
+//            query2.prepare("update tb_CondicoesContorno "
+//                           "set torqueMaximo = '"+torqueMaximo_str+"' where excluir = 'true'");
+//            if(query2.exec())
+//            {
+//                qDebug()<<"sucesso ao atualizar o torque de derrapagem";
+//            }else
+//            {
+//                qDebug()<<"DEU RUIM NA DERRAPAGEM";
+//            }
+
 
             //obtém a quantidade de motores no banco de dados
             int QtdMotores = MainWindow::Verifica_Qtd_Motores();
@@ -128,7 +140,7 @@ void MainWindow::on_Btn_Calcular_clicked()
                 case 1:
                 {
                     qDebug()<<"Mini-sumô";
-                    Result = Resultado_Final_Minisumo(Massa,Raio,ForcaResistente,indice_QtdMotores,Gravidade,QtdMotores,indicePesos);
+                    Result = Resultado_Final_Minisumo(Massa,Raio,ForcaResistente,indice_QtdMotores,Gravidade,QtdMotores,indicePesos,torqueMaximo);
 
 
                 }break;
@@ -208,9 +220,9 @@ void MainWindow::Limpa_CondicoesDeContorno()
         qDebug()<<"Falha na exclusão";
     }
 
-    QString CoefAtrito_estatico= "0.6";
+    QString CoefAtrito_estatico= "0.56";
     QString Gravidade = "9.81";
-    QString ForcaResistente = "12";
+    QString ForcaResistente = "3.5";
     //Após limpar, ela insere 1 unico conjunto de dados padrao
     query.prepare("insert into tb_CondicoesContorno (Massa,Raio,Comprimento,CentroDeGravidade,Gravidade,CoefAtrito,ForcaResistente,Indice_QtdMotores,e1,e2,excluir)"
                   " values('',' ','','','"+Gravidade+"','"+CoefAtrito_estatico+"','"+ForcaResistente+"','0','','','true')");
@@ -225,12 +237,13 @@ void MainWindow::Limpa_CondicoesDeContorno()
      }
 }
 
-void MainWindow::Calc_Dados_Auxiliares(double Massa, double Comprimento, double CentroDeGravidade, double Gravidade, double CoefAtrito_estatico, int indice_QtdMotores,double E1,double E2)
+double MainWindow::Calc_Dados_Auxiliares(double Massa, double Comprimento, double CentroDeGravidade, double Gravidade, double CoefAtrito_estatico, int indice_QtdMotores,double E1,double E2)
 {
     //Função que calcula reações de apoio, forças de atrito, ... COLOCAR MAIS SE TIVE
         //Calcula reações de apoio:
         double Peso = (Massa*Gravidade)/1000; //g --> kg
         double *reacoes = new double[2];
+        double torqueMaximo = 0; //torque máximo até derrapagem
 
         if(indice_QtdMotores == 1 || indice_QtdMotores == 2)
         {
@@ -242,17 +255,17 @@ void MainWindow::Calc_Dados_Auxiliares(double Massa, double Comprimento, double 
             //qDebug()<<"Reacao dianteiro ="+ reacoes1;
 
             //Força de atrito na lamina:
-            double F_lamina = CoefAtrito_estatico*reacoes[1];
+            //double F_lamina = CoefAtrito_estatico*reacoes[1];
             //Torque maximo até derrapar:
-            double torqueMaximo = CoefAtrito_estatico*reacoes[0];
+            torqueMaximo = CoefAtrito_estatico*reacoes[0]/2;
 
         }else
         {
             reacoes = Calc_Reacoes_Apoio(Peso, E2, CentroDeGravidade, E1);
             //Torque maximo até derrapar:
-            double torqueMaximo = CoefAtrito_estatico*reacoes[0];
+            torqueMaximo = CoefAtrito_estatico*reacoes[0]/2;
         }
-
+        return torqueMaximo;
 }
 
 double* MainWindow::Calc_Reacoes_Apoio(double P, double L, double cg, double e1)

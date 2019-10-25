@@ -6,7 +6,10 @@
 #include <QtDebug>
 #include <QFileInfo>
 #include <motoreswindow.h>
+#include <../Eigen/Eigen/Dense>
 //#include <resultwindow.h>
+
+using namespace Eigen;
 
 namespace Ui {
 class MainWindow;
@@ -24,7 +27,7 @@ public:
 
     void Limpa_CondicoesDeContorno();
 
-    void Calc_Dados_Auxiliares(double Massa, double Comprimento, double CentroDeGravidade, double Gravidade, double CoefAtrito_estatico, int indice_QtdMotores,double E1,double E2);
+    double Calc_Dados_Auxiliares(double Massa, double Comprimento, double CentroDeGravidade, double Gravidade, double CoefAtrito_estatico, int indice_QtdMotores,double E1,double E2);
 
     double* Calc_Reacoes_Apoio(double P, double L, double cg, double e1);
 

@@ -3,6 +3,9 @@
 #include <QtSql>
 #include <QDebug>
 #include <QFileInfo>
+#include <iostream>
+
+using namespace std;
 
 Details::Details(QWidget *parent, QString id) :
     QDialog(parent),
@@ -11,8 +14,9 @@ Details::Details(QWidget *parent, QString id) :
     ui->setupUi(this);
     setWindowTitle("Especificações do Motor.");
 
-    QSqlQuery query;
+    QSqlQuery query,query2;
     query.prepare("select * from tb_Motores where id = '"+id+"'");
+    query2.prepare("select * from tb_CondicoesContorno where excluir = 'true'");
     if(query.exec())
     {
         query.first();
@@ -27,6 +31,13 @@ Details::Details(QWidget *parent, QString id) :
 
         ui->tableWidget->setRowCount(10);
 
+//        if(query2.exec())
+//        {
+//            qDebug()<<"encontrou o torque máximo no banco de dados";
+//            query2.first();
+//            cout << query2.value(12).toFloat();
+//        }
+
         //primeira coluna
         ui->tableWidget->insertColumn(0);
         ui->tableWidget->setItem(0,0,new QTableWidgetItem("ID"));
@@ -40,6 +51,7 @@ Details::Details(QWidget *parent, QString id) :
         ui->tableWidget->setItem(8,0,new QTableWidgetItem("Torque Máx"));
         ui->tableWidget->setItem(9,0,new QTableWidgetItem("Preço"));
 
+
         //segunda coluna
         ui->tableWidget->insertColumn(1);
         ui->tableWidget->setItem(0,1,new QTableWidgetItem(query.value(0).toString()));
@@ -52,6 +64,7 @@ Details::Details(QWidget *parent, QString id) :
         ui->tableWidget->setItem(7,1,new QTableWidgetItem(query.value(8).toString()));
         ui->tableWidget->setItem(8,1,new QTableWidgetItem(query.value(9).toString()));
         ui->tableWidget->setItem(9,1,new QTableWidgetItem(query.value(10).toString()));
+
 
     }
 }

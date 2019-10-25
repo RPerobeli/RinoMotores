@@ -132,7 +132,7 @@
     <item>
      <widget class="QLabel" name="label_coefAtrito">
       <property name="text">
-       <string>Coeficiente de Atrito (dinâmico) :</string>
+       <string>Coeficiente de Atrito (estático) :</string>
       </property>
      </widget>
     </item>
@@ -298,7 +298,7 @@ color:#fff;</string>
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>

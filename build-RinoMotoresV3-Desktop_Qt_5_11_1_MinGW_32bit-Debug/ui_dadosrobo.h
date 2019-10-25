@@ -69,7 +69,7 @@ public:
     QVBoxLayout *verticalLayout_7;
     QPushButton *BtnOK;
     QPushButton *Btn_Cancel;
-    QWidget *widget;
+    QWidget *layoutWidget4;
     QVBoxLayout *verticalLayout_8;
     QLabel *label_titulo;
     QHBoxLayout *horizontalLayout_2;
@@ -293,13 +293,13 @@ public:
 
         verticalLayout_7->addWidget(Btn_Cancel);
 
-        widget = new QWidget(DadosRobo);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(10, 10, 611, 69));
-        verticalLayout_8 = new QVBoxLayout(widget);
+        layoutWidget4 = new QWidget(DadosRobo);
+        layoutWidget4->setObjectName(QStringLiteral("layoutWidget4"));
+        layoutWidget4->setGeometry(QRect(10, 10, 611, 69));
+        verticalLayout_8 = new QVBoxLayout(layoutWidget4);
         verticalLayout_8->setObjectName(QStringLiteral("verticalLayout_8"));
         verticalLayout_8->setContentsMargins(0, 0, 0, 0);
-        label_titulo = new QLabel(widget);
+        label_titulo = new QLabel(layoutWidget4);
         label_titulo->setObjectName(QStringLiteral("label_titulo"));
         QFont font;
         font.setPointSize(16);
@@ -316,7 +316,7 @@ public:
 
         horizontalLayout_2->addItem(horizontalSpacer_2);
 
-        Btn_Avisos = new QPushButton(widget);
+        Btn_Avisos = new QPushButton(layoutWidget4);
         Btn_Avisos->setObjectName(QStringLiteral("Btn_Avisos"));
         Btn_Avisos->setStyleSheet(QLatin1String("background-color:#305dbf;\n"
 "color:#fff;"));
@@ -347,7 +347,7 @@ public:
         label_Cg->setText(QApplication::translate("DadosRobo", "Centro de Gravidade (mm):", nullptr));
         label_X->setText(QApplication::translate("DadosRobo", "X:", nullptr));
         label_Gravidade->setText(QApplication::translate("DadosRobo", "Gravidade (m/s\302\262):", nullptr));
-        label_coefAtrito->setText(QApplication::translate("DadosRobo", "Coeficiente de Atrito (din\303\242mico) :", nullptr));
+        label_coefAtrito->setText(QApplication::translate("DadosRobo", "Coeficiente de Atrito (est\303\241tico) :", nullptr));
         label_Forca->setText(QApplication::translate("DadosRobo", "Forca Resistente (N) :", nullptr));
         label_QtdMotores->setText(QApplication::translate("DadosRobo", "Quantidade de motores:", nullptr));
         comboBox_QtdMotores->setItemText(0, QApplication::translate("DadosRobo", "Selecione", nullptr));

@@ -55,7 +55,7 @@ void Results::on_Btn_Fechar_clicked()
 void Results::Preenche_Tabela_Resultados(MatrixXd m)
 {
     //Insere na tabela os titulos das colunas e define um tamanho menor para a coluna de ID
-    QStringList cabecalho ={"ID", "Fabricante/Modelo","Redução", "Nota Final"};
+    QStringList cabecalho ={"ID", "Fabricante/Modelo","Redução", "Nota Final", "Deslizamento"};
     ui->tableWidget_Ranking->setHorizontalHeaderLabels(cabecalho);
     ui->tableWidget_Ranking->setColumnWidth(0,100);
 
@@ -63,11 +63,19 @@ void Results::Preenche_Tabela_Resultados(MatrixXd m)
     ui->tableWidget_Ranking->setSelectionBehavior(QAbstractItemView::SelectRows); //Ao clicar em um item, a linha inteira é selecionada
     ui->tableWidget_Ranking->verticalHeader()->setVisible(false); //Esconde os valores das linhas
 
-    ui->tableWidget_Ranking->setColumnCount(4);
+    ui->tableWidget_Ranking->setColumnCount(5);
     for(int i = 0; i<m.cols();i++)
     {
         QString Nota = QString::number(m(1,i),'g',6);
         QString ID = QString::number(m(0,i),'g',4);
+        QString deslizamento;
+        if(m(2,i) != 0)
+        {
+            deslizamento = "Derrapa";
+        }else
+        {
+            deslizamento = "Não derrapa";
+        }
         QSqlQuery query;
         query.prepare("select * from tb_Motores where id = '"+ID+"'");
         if(query.exec())
@@ -78,6 +86,7 @@ void Results::Preenche_Tabela_Resultados(MatrixXd m)
             ui->tableWidget_Ranking->setItem(i,1,new QTableWidgetItem(query.value(1).toString()));
             ui->tableWidget_Ranking->setItem(i,2,new QTableWidgetItem(query.value(2).toString()));
             ui->tableWidget_Ranking->setItem(i,3,new QTableWidgetItem(Nota));
+            ui->tableWidget_Ranking->setItem(i,4,new QTableWidgetItem(deslizamento));
         }
     }
 }
