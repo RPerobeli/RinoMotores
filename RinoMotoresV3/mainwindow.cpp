@@ -10,6 +10,11 @@
 #include <QFileInfo>
 #include <libcalculus.h>
 
+//define aqui em cima o caminho pros bancos de dados, dessa forma é possível usar diversos bancos diferentes
+#define DataBase "../RinoMotoresV3/db_Motores.db" //banco de dados geral com todos os motores existentes
+//#define DataBase "../RinoMotoresV3/db_Motoress.db" //banco de dados sucinto, mais restrito para comparações menores
+
+
 //Salva o banco de dados em uma variável
 static QSqlDatabase DbMotores = QSqlDatabase::addDatabase("QSQLITE");
 
@@ -52,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowTitle("Rinobot Team - Cálculo de Motores");
 
-    DbMotores.setDatabaseName("../RinoMotoresV3/db_Motores.db");
+    DbMotores.setDatabaseName(DataBase);
 
     Database_Verify();
     Limpa_CondicoesDeContorno();

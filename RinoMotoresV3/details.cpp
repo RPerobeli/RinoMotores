@@ -42,14 +42,14 @@ Details::Details(QWidget *parent, QString id) :
         ui->tableWidget->insertColumn(0);
         ui->tableWidget->setItem(0,0,new QTableWidgetItem("ID"));
         ui->tableWidget->setItem(1,0,new QTableWidgetItem("Redução"));
-        ui->tableWidget->setItem(2,0,new QTableWidgetItem("Kt"));
-        ui->tableWidget->setItem(3,0,new QTableWidgetItem("Kv"));
-        ui->tableWidget->setItem(4,0,new QTableWidgetItem("Tensão"));
-        ui->tableWidget->setItem(5,0,new QTableWidgetItem("Corrente Máx"));
-        ui->tableWidget->setItem(6,0,new QTableWidgetItem("Corrente Mín"));
-        ui->tableWidget->setItem(7,0,new QTableWidgetItem("Rotação Máx"));
-        ui->tableWidget->setItem(8,0,new QTableWidgetItem("Torque Máx"));
-        ui->tableWidget->setItem(9,0,new QTableWidgetItem("Preço"));
+        ui->tableWidget->setItem(2,0,new QTableWidgetItem("Kt (kg.mm/A)"));
+        ui->tableWidget->setItem(3,0,new QTableWidgetItem("Kv (V/rpm)"));
+        ui->tableWidget->setItem(4,0,new QTableWidgetItem("Tensão (kg.mm)"));
+        ui->tableWidget->setItem(5,0,new QTableWidgetItem("Corrente Máx (A)"));
+        ui->tableWidget->setItem(6,0,new QTableWidgetItem("Corrente Mín (A)"));
+        ui->tableWidget->setItem(7,0,new QTableWidgetItem("Rotação Máx (rpm)"));
+        ui->tableWidget->setItem(8,0,new QTableWidgetItem("Torque Máx (kg.mm)"));
+        ui->tableWidget->setItem(9,0,new QTableWidgetItem("Preço (R$)"));
 
 
         //segunda coluna
