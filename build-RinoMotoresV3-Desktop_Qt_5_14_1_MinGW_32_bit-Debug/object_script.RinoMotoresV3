@@ -1,0 +1,17 @@
+main.o
+mainwindow.o
+motoreswindow.o
+add_motor.o
+results.o
+edit_motor.o
+dadosrobo.o
+details.o
+polarwindowmain.o
+moc_mainwindow.o
+moc_motoreswindow.o
+moc_add_motor.o
+moc_results.o
+moc_edit_motor.o
+moc_dadosrobo.o
+moc_details.o
+moc_polarwindowmain.o
