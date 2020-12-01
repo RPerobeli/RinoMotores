@@ -28,14 +28,21 @@ QT_CHARTS_USE_NAMESPACE
 using namespace Eigen;
 using namespace std;
 
-Results::Results(QWidget *parent, MatrixXd* Matriz) :
+Results::Results(QWidget *parent, MatrixXd* Matriz, bool analisePot) :
     QDialog(parent),
     ui(new Ui::Results)
 {
     ui->setupUi(this);
     setWindowTitle("Resultado da Simulação");
     //preenche o table widget com a matriz resultante
-    Preenche_Tabela_Resultados(*Matriz);
+    if(analisePot)
+    {
+        Preenche_Tabela_Analise_Potencia(*Matriz);
+    }else
+    {
+        Preenche_Tabela_Resultados(*Matriz);
+    }
+
 
     ui->Btn_Detalhes->setEnabled(false);
     ui->Btn_PlotPolar->setEnabled(false);
@@ -89,6 +96,39 @@ void Results::Preenche_Tabela_Resultados(MatrixXd m)
             ui->tableWidget_Ranking->setItem(i,4,new QTableWidgetItem(deslizamento));
         }
     }
+}
+
+void Results::Preenche_Tabela_Analise_Potencia(MatrixXd m)
+{
+    //Insere na tabela os titulos das colunas e define um tamanho menor para a coluna de ID
+    QStringList cabecalho ={"ID", "Fabricante/Modelo","Redução", "Eficiencia Média", "Potencia Mec Média"};
+    ui->tableWidget_Ranking->setHorizontalHeaderLabels(cabecalho);
+    ui->tableWidget_Ranking->setColumnWidth(0,100);
+
+    ui->tableWidget_Ranking->setEditTriggers(QAbstractItemView::NoEditTriggers); //Não permite edição na tabela
+    ui->tableWidget_Ranking->setSelectionBehavior(QAbstractItemView::SelectRows); //Ao clicar em um item, a linha inteira é selecionada
+    ui->tableWidget_Ranking->verticalHeader()->setVisible(false); //Esconde os valores das linhas
+
+    ui->tableWidget_Ranking->setColumnCount(5);
+    for(int i = 0; i<m.cols();i++)
+    {
+        QString Pot = QString::number(m(2,i),'g',6); //2, se quiser a media, 1 se quiser a area da integral
+        QString Eff = QString::number(m(4,i), 'g',6); //4, se quiser a media, 3 se quiser a area da integral
+        QString ID = QString::number(m(0,i),'g',4);
+        QSqlQuery query;
+        query.prepare("select * from tb_Motores where id = '"+ID+"'");
+        if(query.exec())
+        {
+            query.first();
+            ui->tableWidget_Ranking->insertRow(i);
+            ui->tableWidget_Ranking->setItem(i,0,new QTableWidgetItem(ID));
+            ui->tableWidget_Ranking->setItem(i,1,new QTableWidgetItem(query.value(1).toString()));
+            ui->tableWidget_Ranking->setItem(i,2,new QTableWidgetItem(query.value(2).toString()));
+            ui->tableWidget_Ranking->setItem(i,3,new QTableWidgetItem(Eff));
+            ui->tableWidget_Ranking->setItem(i,4,new QTableWidgetItem(Pot));
+        }
+    }
+
 }
 
 void Results::on_Btn_Detalhes_clicked()
@@ -187,7 +227,7 @@ void Results::on_Btn_PlotPolar_clicked()
     ui->Btn_PlotPolar->setEnabled(false);
 }
 
-void Results::on_tableWidget_Ranking_cellClicked(int row, int column)
+void Results::on_tableWidget_Ranking_cellClicked()
 {
     ui->Btn_Detalhes->setEnabled(true);
     ui->Btn_PlotPolar->setEnabled(true);

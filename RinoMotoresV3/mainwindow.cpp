@@ -11,8 +11,8 @@
 #include <libcalculus.h>
 
 //define aqui em cima o caminho pros bancos de dados, dessa forma é possível usar diversos bancos diferentes
-#define DataBase "../RinoMotoresV3/db_Motores.db" //banco de dados geral com todos os motores existentes
-//#define DataBase "../RinoMotoresV3/db_Motoress.db" //banco de dados sucinto, mais restrito para comparações menores
+//#define DataBase "../RinoMotoresV3/db_Motores.db" //banco de dados geral com todos os motores existentes
+#define DataBase "../RinoMotoresV3/db_Motoress.db" //banco de dados sucinto, mais restrito para comparações menores
 
 
 //Salva o banco de dados em uma variável
@@ -92,6 +92,7 @@ void MainWindow::on_Btn_Calcular_clicked()
 {
     MatrixXd Result;
     MatrixXd* Pointer_Result = &Result;
+    bool chavePot = false;
     //É necessário saber qual a aplicação do robô antes de calcular qualquer coisa
     int indiceAplicacao = ui->comboBox_Aplicacao->currentIndex();
     if(indiceAplicacao == 0)
@@ -164,6 +165,12 @@ void MainWindow::on_Btn_Calcular_clicked()
                     qDebug()<<"Outros";
                     //MatrixXd Result = Resultado_Final_Outro();
                 }break;
+                case 5:
+                {
+                    qDebug()<<"Analise de Potencia";
+                    Result = Analise_de_Potencias(QtdMotores);
+                    chavePot = true;
+                }
                 default:
                     qDebug()<<"erro no switch case";
                     break;
@@ -172,7 +179,7 @@ void MainWindow::on_Btn_Calcular_clicked()
 
 
             //Abre a Janela de Resultados
-            Results Result_Window(this, Pointer_Result);
+            Results Result_Window(this, Pointer_Result, chavePot);
             Result_Window.exec();
         }else
         {

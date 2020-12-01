@@ -9,38 +9,7 @@
 #include <QDebug>
 #include <QFileInfo>
 
-//Salva o banco de dados em uma variável
-//static QSqlDatabase DbMotores = QSqlDatabase::addDatabase("QSQLITE");
 
-/*void Database_Verify()
-{
-    //Confere se o banco de dados foi aberto
-    if(!DbMotores.open())
-    {
-        //Caixa de mensagem que aparece quando há erro ao abrir o banco de dados
-        QMessageBox ErroOpenDb;
-        ErroOpenDb.setText("Erro ao abrir ao banco de dados!");
-        ErroOpenDb.exec();
-        return;
-    }
-    else
-    {
-       qDebug()<<"Banco Aberto";
-    }
-    if(!DbMotores.isOpen())
-    {
-        //Caixa de mensagem que aparece quando há erro ao conectar com o banco de dados
-        QMessageBox ErroOpenDb;
-        ErroOpenDb.setText("Erro ao conectar o banco de dados!");
-        ErroOpenDb.exec();
-        return;
-    }
-    else
-    {
-       qDebug()<<"Conectado ao Banco";
-    }
-    return;
-}*/
 
 MotoresWindow::MotoresWindow(QWidget *parent) :
     QDialog(parent),

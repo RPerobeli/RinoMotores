@@ -83,6 +83,7 @@ public:
         comboBox_Aplicacao->addItem(QString());
         comboBox_Aplicacao->addItem(QString());
         comboBox_Aplicacao->addItem(QString());
+        comboBox_Aplicacao->addItem(QString());
         comboBox_Aplicacao->setObjectName(QString::fromUtf8("comboBox_Aplicacao"));
         comboBox_Aplicacao->setStyleSheet(QString::fromUtf8("background-color:#c73232;\n"
 "color:#fff;"));
@@ -133,7 +134,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 501, 25));
+        menuBar->setGeometry(QRect(0, 0, 501, 20));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -158,6 +159,7 @@ public:
         comboBox_Aplicacao->setItemText(2, QCoreApplication::translate("MainWindow", "Seguidor de Linha", nullptr));
         comboBox_Aplicacao->setItemText(3, QCoreApplication::translate("MainWindow", "VSSS", nullptr));
         comboBox_Aplicacao->setItemText(4, QCoreApplication::translate("MainWindow", "Outros", nullptr));
+        comboBox_Aplicacao->setItemText(5, QCoreApplication::translate("MainWindow", "Analise de Pot\303\252ncia", nullptr));
 
         label_2->setText(QCoreApplication::translate("MainWindow", "Foco de motor desejado:", nullptr));
         comboBox->setItemText(0, QCoreApplication::translate("MainWindow", "Selecione", nullptr));

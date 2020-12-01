@@ -21,10 +21,11 @@ class Results : public QDialog
     Q_OBJECT
 
 public:
-    explicit Results(QWidget *parent = nullptr, MatrixXd *Matrix = nullptr);
+    explicit Results(QWidget *parent = nullptr, MatrixXd *Matrix = nullptr, bool analisePot = false);
     ~Results();
 
     void Preenche_Tabela_Resultados(MatrixXd matriz);
+    void Preenche_Tabela_Analise_Potencia(MatrixXd matriz);
 
 private slots:
     void on_Btn_Fechar_clicked();
@@ -33,7 +34,7 @@ private slots:
 
     void on_Btn_PlotPolar_clicked();
 
-    void on_tableWidget_Ranking_cellClicked(int row, int column);
+    void on_tableWidget_Ranking_cellClicked();
 
 private:
     Ui::Results *ui;

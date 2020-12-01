@@ -119,6 +119,7 @@ MatrixXd Modula_Notas(VectorXd vetorDeMaximos, MatrixXd notasTestes)
 
 MatrixXd Ordena_Matriz(MatrixXd matrix)
 {
+    //Ordena a matriz de acordo com a NOTA obtida
     //cout <<"matrix:\n"<< *matrix <<endl;
     Vector2d aux; aux<<0,0;
     for(int i = 0;i<matrix.cols();i++)
@@ -542,6 +543,85 @@ double* Resultado_Final_VSSS()
     //retorna a matriz de resultados, com ID e nota
     return;
 }*/
+MatrixXd Analise_de_Potencias(int QtdMotores)
+{
+    //calcula a potencia mecanica de todos os motores, bem como sua eficiencia
+    //usando os calculos básicos de potencia mecanica e eletrica
+    QSqlQuery query;
+    query.prepare("select * from tb_Motores");
+    int N = 1000; //resolução dos vetores a serem integrados
+    int cont =0;
+    MatrixXd ResultadosFinais(5,QtdMotores);
+    if(query.exec())
+    {
+        while(query.next())//enquanto houver um motor
+        {
+            //cout<<"Entrou no while dos motores"<<endl;
+
+
+            //adquire as variáveis
+            double ID = query.value(0).toDouble();
+            //QString Fabricante = query.value(1).toString();
+            //double Reducao = query.value(2).toDouble();
+            double Kt = query.value(3).toDouble();
+            //double Kv = query.value(4).toDouble();
+            double Tensao = query.value(5).toDouble();
+            //double I_max = query.value(6).toDouble();
+            //double I_min = query.value(7).toDouble();
+            double Rot_max = query.value(8).toDouble();
+            double Torque_max = query.value(9).toDouble();
+            //double Preco = query.value(10).toDouble();
+
+            //Prepara os vetores para posteriores calculos
+            double dT = Torque_max/N;
+            VectorXd Torques(N);
+            VectorXd Rotacoes(N);
+            VectorXd correntes(N);
+            VectorXd PotEletrica(N);
+            VectorXd PotMecanica(N);
+            VectorXd Eficiencias(N);
+            double mediaPotM=0;
+            double mediaPotE=0;
+            double mediaEff=0;
+            for(int i=0;i<N;i++)
+            {
+               Torques(i)= dT+i*dT;
+               correntes(i) = Torques(i)/Kt;
+               PotEletrica(i)= Tensao*correntes(i);
+               Rotacoes(i) = ((-Rot_max/Torque_max)*Torques(i) + Rot_max)*pi/30;
+               PotMecanica(i)= Torques(i)*Rotacoes(i);
+               mediaPotM += PotMecanica(i);
+               mediaPotE += PotEletrica(i);
+            }
+            mediaPotM = mediaPotM/N;
+            mediaPotE = mediaPotE/N;
+            for(int i=0;i<N;i++)
+            {
+                //Calcula as eficiencias a partir da media da potencia eletrica
+                Eficiencias(i) = PotMecanica(i)/mediaPotE;
+                mediaEff += Eficiencias(i);
+            }
+            mediaEff = mediaEff/N;
+
+            //calcula as integrais de potencia e eficiencia:
+            double intPotMec = 0;
+            double intEff=0;
+            for(int j=1;j<N;j++)
+            {
+                intPotMec = intPotMec + 0.5*dT*(PotMecanica(j)+PotMecanica(j-1));
+                intEff = intEff + 0.5*dT*(Eficiencias(j)+Eficiencias(j-1));
+            }
+            ResultadosFinais(0,cont) = ID;
+            ResultadosFinais(1,cont) = intPotMec;
+            ResultadosFinais(2,cont) = mediaPotM;
+            ResultadosFinais(3,cont) = intEff;
+            ResultadosFinais(4,cont) = mediaEff;
+            cont++;
+        }
+
+    }
+    return ResultadosFinais;
+}
 
 
 

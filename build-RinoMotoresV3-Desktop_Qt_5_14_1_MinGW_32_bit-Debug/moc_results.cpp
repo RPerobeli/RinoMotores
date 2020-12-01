@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Results_t {
-    QByteArrayData data[8];
-    char stringdata0[126];
+    QByteArrayData data[6];
+    char stringdata0[115];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,16 +37,13 @@ QT_MOC_LITERAL(1, 8, 21), // "on_Btn_Fechar_clicked"
 QT_MOC_LITERAL(2, 30, 0), // ""
 QT_MOC_LITERAL(3, 31, 23), // "on_Btn_Detalhes_clicked"
 QT_MOC_LITERAL(4, 55, 24), // "on_Btn_PlotPolar_clicked"
-QT_MOC_LITERAL(5, 80, 34), // "on_tableWidget_Ranking_cellCl..."
-QT_MOC_LITERAL(6, 115, 3), // "row"
-QT_MOC_LITERAL(7, 119, 6) // "column"
+QT_MOC_LITERAL(5, 80, 34) // "on_tableWidget_Ranking_cellCl..."
 
     },
     "Results\0on_Btn_Fechar_clicked\0\0"
     "on_Btn_Detalhes_clicked\0"
     "on_Btn_PlotPolar_clicked\0"
-    "on_tableWidget_Ranking_cellClicked\0"
-    "row\0column"
+    "on_tableWidget_Ranking_cellClicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -67,13 +64,13 @@ static const uint qt_meta_data_Results[] = {
        1,    0,   34,    2, 0x08 /* Private */,
        3,    0,   35,    2, 0x08 /* Private */,
        4,    0,   36,    2, 0x08 /* Private */,
-       5,    2,   37,    2, 0x08 /* Private */,
+       5,    0,   37,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,    6,    7,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -87,10 +84,11 @@ void Results::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 0: _t->on_Btn_Fechar_clicked(); break;
         case 1: _t->on_Btn_Detalhes_clicked(); break;
         case 2: _t->on_Btn_PlotPolar_clicked(); break;
-        case 3: _t->on_tableWidget_Ranking_cellClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 3: _t->on_tableWidget_Ranking_cellClicked(); break;
         default: ;
         }
     }
+    Q_UNUSED(_a);
 }
 
 QT_INIT_METAOBJECT const QMetaObject Results::staticMetaObject = { {

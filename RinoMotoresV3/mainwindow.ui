@@ -103,6 +103,11 @@ color:#fff;</string>
            <string>Outros</string>
           </property>
          </item>
+         <item>
+          <property name="text">
+           <string>Analise de Potência</string>
+          </property>
+         </item>
         </widget>
        </item>
        <item>
@@ -189,7 +194,7 @@ color:#fff;</string>
      <x>0</x>
      <y>0</y>
      <width>501</width>
-     <height>25</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>
