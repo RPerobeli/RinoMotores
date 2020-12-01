@@ -142,6 +142,40 @@ MatrixXd Ordena_Matriz(MatrixXd matrix)
     }
     return matrix;
 }
+MatrixXd Ordena_Matriz_Analise_Potencia(MatrixXd matrix)
+{
+    //Ordena a matriz de acordo com a Potencia Mecanica Media obtida
+    //cout <<"matrix:\n"<< *matrix <<endl;
+    VectorXd aux(5); aux<<0,0,0,0,0;
+
+    for(int i = 0;i<matrix.cols();i++)
+    {
+        for(int j=i+1; j<matrix.cols();j++)
+        {
+            if(matrix(2,i)<matrix(2,j))
+            {
+                aux(0) = matrix(0,i);
+                aux(1) = matrix(1,i);
+                aux(2) = matrix(2,i);
+                aux(3) = matrix(3,i);
+                aux(4) = matrix(4,i);
+
+                matrix(0,i) = matrix(0,j);
+                matrix(1,i) = matrix(1,j);
+                matrix(2,i) = matrix(2,j);
+                matrix(3,i) = matrix(3,j);
+                matrix(4,i) = matrix(4,j);
+
+                matrix(0,j) = aux(0);
+                matrix(1,j) = aux(1);
+                matrix(2,j) = aux(2);
+                matrix(3,j) = aux(3);
+                matrix(4,j) = aux(4);
+            }
+        }
+    }
+    return matrix;
+}
 
 void Adequa_Unidades_Robo_SI(double *Massa,double *Raio)
 {
@@ -624,6 +658,7 @@ MatrixXd Analise_de_Potencias(int QtdMotores)
             ResultadosFinais(4,cont) = mediaEff;
             cont++;
         }
+        ResultadosFinais = Ordena_Matriz_Analise_Potencia(ResultadosFinais);
 
     }
     return ResultadosFinais;
