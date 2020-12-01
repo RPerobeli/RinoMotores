@@ -22,6 +22,7 @@ using namespace std;
 #define erro 0.00001 //erro permitido pelo metodo rungekutta
 //#define B 0.0005 //constante de atrito viscoso
 #define B 0.00001
+#define Grav 9.81
 
 MatrixXd Ponderacao(int indice,MatrixXd notasModuladas,MatrixXd notasTestes)
 {
@@ -558,13 +559,12 @@ MatrixXd Analise_de_Potencias(int QtdMotores)
         {
             //cout<<"Entrou no while dos motores"<<endl;
 
-
             //adquire as variáveis
             double ID = query.value(0).toDouble();
             //QString Fabricante = query.value(1).toString();
             //double Reducao = query.value(2).toDouble();
             double Kt = query.value(3).toDouble();
-            //double Kv = query.value(4).toDouble();
+            double Kv = query.value(4).toDouble();
             double Tensao = query.value(5).toDouble();
             //double I_max = query.value(6).toDouble();
             //double I_min = query.value(7).toDouble();
@@ -572,6 +572,10 @@ MatrixXd Analise_de_Potencias(int QtdMotores)
             double Torque_max = query.value(9).toDouble();
             //double Preco = query.value(10).toDouble();
 
+            Adequa_Unidades_SI(&Torque_max,&Kv,&Rot_max,&Kt,Grav);
+
+
+            //alteracao das unidades
             //Prepara os vetores para posteriores calculos
             double dT = Torque_max/N;
             VectorXd Torques(N);
@@ -583,12 +587,14 @@ MatrixXd Analise_de_Potencias(int QtdMotores)
             double mediaPotM=0;
             double mediaPotE=0;
             double mediaEff=0;
+
+            //Efetua as contas
             for(int i=0;i<N;i++)
             {
                Torques(i)= dT+i*dT;
                correntes(i) = Torques(i)/Kt;
                PotEletrica(i)= Tensao*correntes(i);
-               Rotacoes(i) = ((-Rot_max/Torque_max)*Torques(i) + Rot_max)*pi/30;
+               Rotacoes(i) = (-Rot_max/Torque_max)*Torques(i) + Rot_max;
                PotMecanica(i)= Torques(i)*Rotacoes(i);
                mediaPotM += PotMecanica(i);
                mediaPotE += PotEletrica(i);
@@ -598,10 +604,10 @@ MatrixXd Analise_de_Potencias(int QtdMotores)
             for(int i=0;i<N;i++)
             {
                 //Calcula as eficiencias a partir da media da potencia eletrica
-                Eficiencias(i) = PotMecanica(i)/mediaPotE;
+                Eficiencias(i) = (PotMecanica(i)/mediaPotE)*100;
                 mediaEff += Eficiencias(i);
             }
-            mediaEff = mediaEff/N;
+            mediaEff = (mediaEff/N);
 
             //calcula as integrais de potencia e eficiencia:
             double intPotMec = 0;
