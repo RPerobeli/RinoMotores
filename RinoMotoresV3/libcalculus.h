@@ -596,7 +596,7 @@ MatrixXd Analise_de_Potencias(int QtdMotores)
             //adquire as variáveis
             double ID = query.value(0).toDouble();
             //QString Fabricante = query.value(1).toString();
-            //double Reducao = query.value(2).toDouble();
+            double Reducao = query.value(2).toDouble();
             double Kt = query.value(3).toDouble();
             double Kv = query.value(4).toDouble();
             double Tensao = query.value(5).toDouble();
@@ -626,7 +626,7 @@ MatrixXd Analise_de_Potencias(int QtdMotores)
             for(int i=0;i<N;i++)
             {
                Torques(i)= dT+i*dT;
-               correntes(i) = Torques(i)/Kt;
+               correntes(i) = (Torques(i)/Reducao)/Kt;
                PotEletrica(i)= Tensao*correntes(i);
                Rotacoes(i) = (-Rot_max/Torque_max)*Torques(i) + Rot_max;
                PotMecanica(i)= Torques(i)*Rotacoes(i);
